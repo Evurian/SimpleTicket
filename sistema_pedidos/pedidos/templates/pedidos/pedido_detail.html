@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Detalle del Pedido{% endblock %}
+
+{% block content %}
+<h2>Detalle del Pedido</h2>
+<div class="card">
+    <div class="card-header">
+        Pedido {{ object.id }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ object.cliente }}</h5>
+        <p class="card-text">
+            <strong>Producto:</strong> {{ object.producto.nombre }}<br>
+            <strong>Cantidad:</strong> {{ object.cantidad }}<br>
+            <strong>Fecha:</strong> {{ object.fecha }}
+        </p>
+        <a href="{% url 'pedidos:pedido-update' object.pk %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'pedidos:pedido-delete' object.pk %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'pedidos:pedido-list' %}" class="btn btn-secondary">Volver al listado</a>
+    </div>
+</div>
+{% endblock %}

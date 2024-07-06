@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Listado de Pedidos{% endblock %}
+
+{% block content %}
+<h2>Listado de Pedidos</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in object_list %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.cliente }}</td>
+            <td>{{ pedido.producto.nombre }}</td>
+            <td>{{ pedido.cantidad }}</td>
+            <td>{{ pedido.fecha }}</td>
+            <td>
+                <a href="{% url 'pedidos:pedido-detail' pedido.pk %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'pedidos:pedido-update' pedido.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'pedidos:pedido-delete' pedido.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'pedidos:pedido-create' %}" class="btn btn-primary">Agregar nuevo pedido</a>
+{% endblock %}
