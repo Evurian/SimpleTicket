@@ -5,5 +5,15 @@
 ////////////////////////// Header ///////////////////////////
 
 header
-    p
-        @apply text-center
+  @apply bg-gray-800 text-white py-4
+  nav
+    @apply flex justify-between items-center container mx-auto px-4
+    .nav-left
+      @apply flex space-x-4
+    .nav-right
+      @apply flex space-x-4
+      margin-left: auto
+      a
+        @apply text-orange-500 transition duration-300
+        &:hover
+          @apply text-orange-700 transition duration-300

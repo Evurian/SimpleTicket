@@ -45,7 +45,7 @@ export class SignUpComponent {
 
   //Init
   ngOnInit(): void {
-    this.titleService.setTitle("Blog | Sign Up");
+    this.titleService.setTitle("Sign Up");
   }
 
   // Method | Sign Up

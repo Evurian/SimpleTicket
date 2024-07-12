@@ -13,7 +13,7 @@ export class ProfileComponent {
   constructor(private titleService: Title) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Blog | Profile");
+    this.titleService.setTitle("Profile");
   }
 
 }
