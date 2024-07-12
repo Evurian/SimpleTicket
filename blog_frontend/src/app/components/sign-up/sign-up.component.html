@@ -1,0 +1,33 @@
+<a href="/welcome" id="signUpSection1BackHome">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<section id="signUpSection1">
+    <div id="signUpSection1Container">
+      <h1>Registrarse</h1>
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+        <div>
+          <label for="username">Usuario</label>
+          <input formControlName="username" type="username" id="username" placeholder="username" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input formControlName="email" type="email" id="email" placeholder="email" required>
+        </div>
+        <div>
+          <label for="password">Contraseña</label>
+          <input formControlName="password" type="password" id="password" placeholder="password" required>
+        </div>
+        <div>
+          <label for="confirm-password">Confirmar Contraseña</label>
+          <input formControlName="confirmPassword" type="password" id="confirm-password" placeholder="confirm password" required>
+        </div>
+        <button type="submit">Acceder</button>
+      </form>
+      <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p>
+        Ya tienes una cuenta? <a href="/sign-in">Accede ya</a>
+      </p>
+    </div>
+</section>
