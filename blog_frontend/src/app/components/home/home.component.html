@@ -1,14 +1,43 @@
 <app-header></app-header>
-<main>
-  <section id="homeSection1">
-    <div id="homeSection1Container">
-      <h1>Bienvenido a la Página de Inicio</h1>
-      <p>Explora nuestro contenido y disfruta de la experiencia.</p>
-      <div id="homeSection1Link">
-        <a routerLink="/profile">Ir a Perfil</a>
-        <a routerLink="/sign-up">Registrarse</a>
-      </div>
+<div id="homePage">
+  <section id="bannerSection">
+    <div id="bannerContent">
+      <h1>¡Bienvenido a Simpleticket!</h1>
+      <p>Los mejores pedidos, justo a tu puerta.</p>
+      <button id="bannerButton">¡Ordena Ahora!</button>
     </div>
   </section>
-</main>
+
+  <section id="categoriesSection">
+    <h2>Categorías Populares</h2>
+    <div id="categoriesContainer">
+      <div class="category">
+        <img src="assets/picture/home/food_image.jpg" alt="Comida">
+        <p>Comida</p>
+      </div>
+      <div class="category">
+        <img src="assets/picture/home/electronics_image.jpg" alt="Electrónica">
+        <p>Electrónica</p>
+      </div>
+      <!-- Añade más categorías según sea necesario -->
+    </div>
+  </section>
+
+  <section id="offersSection">
+    <h2>Ofertas Especiales</h2>
+    <div id="offersContainer">
+      <div class="offer">
+        <img src="../../assets/picture/home/offer1_image.jpg" alt="Oferta 1">
+        <p>50% de descuento en pedidos de comida</p>
+      </div>
+      <div class="offer">
+        <img src="assets/picture/home/offer2_image.jpg" alt="Oferta 2">
+        <p>Envío gratis en productos electrónicos</p>
+      </div>
+      <!-- Añade más ofertas según sea necesario -->
+    </div>
+  </section>
+
+
+</div>
 <app-footer></app-footer>
