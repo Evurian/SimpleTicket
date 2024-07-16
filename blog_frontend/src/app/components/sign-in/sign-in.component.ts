@@ -17,36 +17,28 @@ import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
   ],
   templateUrl: './sign-in.component.html',
 })
-
 export class SignInComponent implements OnInit {
 
-  // Variables
   signInForm: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
 
-  // Constructor
-  constructor
-  (
+  constructor(
     private titleService: Title,
     private fb: FormBuilder,
     private router: Router,
     private signInService: SignInService
-  ) 
-  {
-    this.signInForm = this.fb.group
-    ({
+  ) {
+    this.signInForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  // Init
   ngOnInit(): void {
     this.titleService.setTitle("Sign In");
   }
 
-  // Method | Sign In
   signIn() {
     if (this.signInForm.invalid) {
       this.errorMessage = "Please fill out the form correctly.";
@@ -57,17 +49,17 @@ export class SignInComponent implements OnInit {
 
     this.signInService.signIn({ username, password }).subscribe(
       response => {
-        this.successMessage = 'Sign In successful !';
+        this.signInService.handleSignIn(response);
+        this.successMessage = 'Sign In successful!';
         this.errorMessage = null;
-        localStorage.setItem('token', response.token);
         setTimeout(() => {
           this.router.navigate(['/profile']);
-        }, 2000);      },
+        }, 2000);
+      },
       error => {
         this.successMessage = null;
         this.errorMessage = 'Invalid credentials. Please try again.';
       }
     );
   }
-
 }

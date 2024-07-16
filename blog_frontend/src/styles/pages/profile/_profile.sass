@@ -1,14 +1,72 @@
 ///////////////////////// KeyFrames /////////////////////////
 
+@keyframes gradientAnimation
+  0%
+    background-position: 0% 50%
+  50%
+    background-position: 100% 50%
+  100%
+    background-position: 0% 50%
+
+@keyframes reveal
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
 ///////////////////////// Animation /////////////////////////
 
-////////////////////////// Sign In //////////////////////////
-        
-//Section 1
+.textReveal-Animation
+  animation: reveal 1s ease-in-out
+
+////////////////////////// Sign in //////////////////////////
 
 #profileSection1
-    background: linear-gradient(-45deg, rgba(249, 115, 22, 0.80), rgba(255, 165, 0, 1), rgba(255, 140, 0, 0.80), rgba(255, 69, 0, 1))
-    background-size: 400% 400%
-    @apply min-h-screen bg-gray-100
-    h1
-        @apply text-center text-white text-2xl pt-10
+  background: linear-gradient(-45deg, rgba(249, 115, 22, 0.80), rgba(255, 165, 0, 1), rgba(255, 140, 0, 0.80), rgba(255, 69, 0, 1))
+  background-size: 400% 400%
+  animation: gradientAnimation 15s ease infinite
+  @apply min-h-screen bg-gray-100
+
+  h1
+    @apply text-center text-white text-2xl pt-10
+
+  .user-info, .user-purchases, .user-settings
+    @apply bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto my-10
+
+  .user-info
+    h2
+      @apply text-3xl font-bold mb-6 text-center
+
+    label
+      display: block
+      margin-bottom: 10px
+
+      input
+        @apply w-full p-2 border rounded-md
+
+    button
+      @apply mt-4 py-2 px-4 bg-blue-500 text-white rounded-lg
+      &:hover
+        @apply bg-blue-600
+
+  .user-purchases
+    h2
+      @apply text-3xl font-bold mb-6 text-center
+
+    ul
+      @apply list-none p-0
+
+      li
+        @apply border-b py-4
+
+        p
+          @apply my-1
+
+  .user-settings
+    h2
+      @apply text-3xl font-bold mb-6 text-center
+
+    button
+      @apply py-2 px-4 bg-red-500 text-white rounded-lg
+      &:hover
+        @apply bg-red-600
