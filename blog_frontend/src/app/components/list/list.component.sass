@@ -1,23 +1,43 @@
+///////////////////////// KeyFrames /////////////////////////
+
+@keyframes gradientAnimation
+    0%
+        background-position: 0% 50%
+    50%
+        background-position: 100% 50%
+    100%
+        background-position: 0% 50%
+
+@keyframes reveal
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+///////////////////////// Animation /////////////////////////
+
+.textReveal-Animation
+    animation: reveal 1s ease-in-out
+
+
+///////////////////////// Productos /////////////////////////
+
 .productos-container
-  display: flex
-  flex-wrap: wrap
-  justify-content: space-around
-  align-items: center
-  height: 100vh
+  @apply flex flex-wrap gap-4 justify-center
 
-  > div
-    margin: 10px
-    display: flex
-    justify-content: center
-    align-items: center
+.card
+  background: linear-gradient(-45deg, rgba(249, 115, 22, 0.80), rgba(255, 165, 0, 1), rgba(255, 140, 0, 0.80), rgba(255, 69, 0, 1))
+  background-size: 400% 400%
+  animation: gradientAnimation 10s ease infinite
+  @apply bg-gray-100 p-4 rounded-lg shadow-md text-center
+  @apply textReveal-Animation
+  img
+    @apply w-full h-40 object-cover mb-4
+  .card-body
+    .card-title
+      @apply text-2xl font-bold mb-2 text-white
+    .card-subtitle
+      @apply text-sm text-gray-300 mb-2
+    .card-text
+      @apply text-base text-white
 
-  p-card
-    width: 360px
-    img
-      width: 100%
-      height: auto
-    p
-      font-size: 14px
-      color: #333
-
-// Puedes agregar más estilos aquí según tus necesidades
