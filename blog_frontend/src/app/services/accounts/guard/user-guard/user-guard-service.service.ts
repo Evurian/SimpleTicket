@@ -1,45 +1,23 @@
+// src/app/services/accounts/guard/user-guard/user-guard.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { SessionService } from '../../session/session-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(this.checkLoggedIn());
+export class UserGuardService implements CanActivate {
 
-  // Observable for login status
-  loggedInStatus = this.loggedIn.asObservable();
+  constructor(
+    private sessionService: SessionService,
+    private router: Router
+  ) { }
 
-  constructor() { }
-
-  // Simulate login
-  login(token: string) {
-    if (this.isBrowser()) {
-      localStorage.setItem('token', token);
+  canActivate(): boolean {
+    if (this.sessionService.isConnected()) {
+      return true;
     }
-    this.loggedIn.next(true);
-  }
-
-  // Simulate logout
-  logout() {
-    if (this.isBrowser()) {
-      localStorage.removeItem('token');
-    }
-    this.loggedIn.next(false);
-  }
-
-  // Check login status
-  isLoggedIn(): boolean {
-    return this.isBrowser() && !!localStorage.getItem('token');
-  }
-
-  // Check if running in browser
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-  }
-
-  // Check login status on initialization
-  private checkLoggedIn(): boolean {
-    return this.isBrowser() && !!localStorage.getItem('token');
+    this.router.navigate(['/sign-in']);
+    return false;
   }
 }

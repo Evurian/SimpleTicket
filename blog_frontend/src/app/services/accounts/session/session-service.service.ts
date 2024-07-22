@@ -4,16 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
-export class SessionServiceService {
+export class SessionService {
 
   constructor() { }
 
   isConnected(): boolean {
-    return localStorage.getItem('token') !== null;
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token') !== null;
+    }
+    return false;
   }
 
-  isDisconnected(): void {
-    localStorage.removeItem('token');
+  isDisconnect(): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('token');
+    }
   }
-  
+
 }

@@ -17,28 +17,36 @@ import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
   ],
   templateUrl: './sign-in.component.html',
 })
+
 export class SignInComponent implements OnInit {
 
+  // Variables
   signInForm: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
 
-  constructor(
+  // Constructor
+  constructor
+  (
     private titleService: Title,
     private fb: FormBuilder,
     private router: Router,
     private signInService: SignInService
-  ) {
-    this.signInForm = this.fb.group({
+  ) 
+  {
+    this.signInForm = this.fb.group
+    ({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', Validators.required]
     });
   }
 
+  // Init
   ngOnInit(): void {
-    this.titleService.setTitle("Sign In");
+    this.titleService.setTitle("Blog | Sign In");
   }
 
+  // Method | Sign In
   signIn() {
     if (this.signInForm.invalid) {
       this.errorMessage = "Please fill out the form correctly.";
@@ -49,9 +57,9 @@ export class SignInComponent implements OnInit {
 
     this.signInService.signIn({ username, password }).subscribe(
       response => {
-        this.signInService.handleSignIn(response);
-        this.successMessage = 'Sign In successful!';
+        this.successMessage = 'Sign In successful !';
         this.errorMessage = null;
+        localStorage.setItem('token', response.token);
         setTimeout(() => {
           this.router.navigate(['/profile']);
         }, 2000);
@@ -62,4 +70,5 @@ export class SignInComponent implements OnInit {
       }
     );
   }
+
 }

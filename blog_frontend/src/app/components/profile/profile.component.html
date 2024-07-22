@@ -1,42 +1,42 @@
-<div class="profile">
-    <h1>Perfil</h1>
-    
-    <div class="user-info">
-      <h2>Información del Usuario</h2>
-      <div>
-        <p><strong>Nombre:</strong> {{ "name" }}</p>
-        <p><strong>Email:</strong> {{ "user.email" }}</p>
-        <button (click)="toggleEdit()">Editar</button>
-      </div>
-  
-      <div >
-        <label>
-          Nombre:
-          
-        </label>
-        <label>
-          Email:
-          
-        </label>
-        <button (click)="saveChanges()">Guardar</button>
-        <button (click)="toggleEdit()">Cancelar</button>
-      </div>
+<app-header></app-header>
+
+<section id="profileSection1">
+    <div id="profileSection1Container">
+        <div id="profileSection1Content">
+            <div *ngIf="profile" id="profileSection1ContentHead">
+                <img src="https://via.placeholder.com/150" alt="pictureProfile">
+                <div>
+                    <h1>{{ profile.username }}</h1>
+                    <button routerLinkActive="active">
+                        <a [routerLink]="['/profile/edit']">
+                            Edit profile
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="profile" id="profileSection1ContentBody">
+                <h2>Additional Information</h2>
+                <div id="profileSection1ContentBodyDiv">
+                    <div>
+                        <h3>Date joined</h3>
+                        <p class="text-gray-800">{{ profile.date_joined | date }}</p>
+                    </div>
+                    <div>
+                        <h3>First name</h3>
+                        <p class="text-gray-800">{{ profile.first_name }}</p>
+                    </div>
+                    <div>
+                        <h3>Last name</h3>
+                        <p class="text-gray-800">{{ profile.last_name }}</p>
+                    </div>
+                    <div>
+                        <h3>Role</h3>
+                        <p class="font-bold" [ngClass]="getUserRoleClass()">{{ role }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  
-    <div class="user-purchases">
-      <h2>Compras</h2>
-      <ul>
-        <li>
-          <p><strong>Producto:</strong> {{ "purchase.productName" }}</p>
-          <p><strong>Fecha:</strong> {{ "purchase.date" }}</p>
-          <p><strong>Precio:</strong> {{ "purchase.price | currency" }}</p>
-        </li>
-      </ul>
-    </div>
-  
-    <div class="user-settings">
-      <h2>Ajustes</h2>
-      <!-- Puedes añadir más ajustes aquí -->
-    </div>
-  </div>
-  
+</section>
+
+<app-footer></app-footer>
