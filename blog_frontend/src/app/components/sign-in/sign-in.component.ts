@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
 
   // Init
   ngOnInit(): void {
-    this.titleService.setTitle("Blog | Sign In");
+    this.titleService.setTitle("Sign In");
   }
 
   // Method | Sign In

@@ -14,8 +14,8 @@ export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [UserGuardService] },
     { path: 'profile', component: ProfileComponent, canActivate: [UserGuardService] },
     { path: 'welcome', component: WelcomeComponent, canActivate: [GuestGuardService] },
-    { path: 'sign-in', component: SignInComponent, canActivate: [GuestGuardService] },
-    { path: 'sign-up', component: SignUpComponent, canActivate: [GuestGuardService] },
-    {path: 'list', component: ListComponent},
+    { path: 'sign-in', component: SignInComponent},
+    { path: 'sign-up', component: SignUpComponent },
+    {path: 'list', component: ListComponent, canActivate: [GuestGuardService]},
     { path: '**', redirectTo: 'sign-in' },// Others URL
 ];
