@@ -164,13 +164,13 @@ REST_FRAMEWORK = {
 }
 
 # In development
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # In Production
 
-CORS_ALLOWED_ORIGINS = [
-     'http://localhost:4200',
-]
+# CORS_ALLOWED_ORIGINS = [
+#      'http://localhost:4200',
+# ]
 
 
 # settings.py

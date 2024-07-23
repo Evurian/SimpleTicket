@@ -9,13 +9,14 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserGuardService } from './services/accounts/guard/user-guard/user-guard-service.service';
 import { GuestGuardService } from './services/accounts/guard/guest-guard/guest-guard-service.service';
 import { ListComponent } from './components/list/list.component';
-
+import { ProductDetailComponent } from './components/detail-product/detail-product.component';
 export const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [UserGuardService] },
+    { path: 'home', component: HomeComponent, canActivate: [UserGuardService] },
     { path: 'profile', component: ProfileComponent, canActivate: [UserGuardService] },
     { path: 'welcome', component: WelcomeComponent, canActivate: [GuestGuardService] },
     { path: 'sign-in', component: SignInComponent},
     { path: 'sign-up', component: SignUpComponent },
-    {path: 'list', component: ListComponent, canActivate: [GuestGuardService]},
-    { path: '**', redirectTo: 'sign-in' },// Others URL
+    {path: 'list', component: ListComponent},
+    { path: 'product/:id', component: ProductDetailComponent },
+    { path: '**', redirectTo: 'home' },// Others URL
 ];

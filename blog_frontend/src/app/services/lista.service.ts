@@ -23,4 +23,8 @@ export class ListaService {
   getProducts(): Observable<Productos[]> {
     return this.http.get<Productos[]>(this.apiUrl);
   }
+  getProductById(id: number): Observable<Productos> {
+    return this.http.get<Productos>(`${this.apiUrl}/${id}`);
+  }
+  
 }
