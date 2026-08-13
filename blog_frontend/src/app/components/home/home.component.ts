@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -8,20 +9,18 @@ import { FooterComponent } from '../footer/footer.component';
   selector: 'app-home',
   standalone: true,
   imports: [
+    RouterLink,
     HeaderComponent,
     FooterComponent
   ],
   templateUrl: './home.component.html',
 })
+export class HomeComponent implements OnInit {
 
-export class HomeComponent {
-
-  // Constructor
   constructor(private titleService: Title) { }
 
-  // Init
   ngOnInit(): void {
-    this.titleService.setTitle("Home");
+    this.titleService.setTitle("SimpleTicket - Inicio");
   }
 
 }

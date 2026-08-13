@@ -1,0 +1,258 @@
+// ===================================================
+//  SISTEMA DE BOTONES SIMPLETICKET v3.0
+// ===================================================
+
+@import 'variables';
+@import 'typography';
+
+// ---------- BASE ----------
+.btn {
+  @extend .btn-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  padding: $spacing-2 $spacing-4;
+  border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  min-height: 40px;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $primary-500;
+    outline-offset: 2px;
+  }
+  
+  // Tamaños
+  &--xs {
+    padding: $spacing-1 $spacing-2;
+    font-size: $font-xs;
+    min-height: 28px;
+  }
+  
+  &--sm {
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-sm;
+    min-height: 32px;
+  }
+  
+  &--lg {
+    padding: $spacing-3 $spacing-6;
+    font-size: $font-base;
+    min-height: 48px;
+  }
+  
+  &--xl {
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-lg;
+    min-height: 56px;
+  }
+  
+  // Ancho completo
+  &--full {
+    width: 100%;
+  }
+  
+  // Iconos
+  &--icon {
+    padding: $spacing-2;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  
+  &--icon-sm {
+    padding: $spacing-1;
+    min-height: 32px;
+    min-width: 32px;
+  }
+}
+
+// ---------- VARIANTES ----------
+.btn-primary {
+  @extend .btn;
+  background: $primary-500;
+  color: $text-white;
+  
+  &:hover:not(:disabled) {
+    background: $primary-600;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  @extend .btn;
+  background: $gray-200;
+  color: $text-secondary;
+  
+  &:hover:not(:disabled) {
+    background: $gray-300;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-success {
+  @extend .btn;
+  background: $success;
+  color: $text-white;
+  
+  &:hover:not(:disabled) {
+    background: darken($success, 10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-danger {
+  @extend .btn;
+  background: $error;
+  color: $text-white;
+  
+  &:hover:not(:disabled) {
+    background: darken($error, 10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-warning {
+  @extend .btn;
+  background: $warning;
+  color: $text-white;
+  
+  &:hover:not(:disabled) {
+    background: darken($warning, 10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// ---------- OUTLINE ----------
+.btn-outline-primary {
+  @extend .btn;
+  background: transparent;
+  color: $primary-500;
+  border: 2px solid $primary-500;
+  
+  &:hover:not(:disabled) {
+    background: $primary-50;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-outline-secondary {
+  @extend .btn;
+  background: transparent;
+  color: $text-secondary;
+  border: 2px solid $gray-300;
+  
+  &:hover:not(:disabled) {
+    background: $gray-100;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-outline-success {
+  @extend .btn;
+  background: transparent;
+  color: $success;
+  border: 2px solid $success;
+  
+  &:hover:not(:disabled) {
+    background: $secondary-50;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-outline-danger {
+  @extend .btn;
+  background: transparent;
+  color: $error;
+  border: 2px solid $error;
+  
+  &:hover:not(:disabled) {
+    background: rgba($error, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+// ---------- GHOST ----------
+.btn-ghost {
+  @extend .btn;
+  background: transparent;
+  color: $text-secondary;
+  
+  &:hover:not(:disabled) {
+    background: $gray-100;
+  }
+}
+
+.btn-ghost-primary {
+  @extend .btn;
+  background: transparent;
+  color: $primary-500;
+  
+  &:hover:not(:disabled) {
+    background: $primary-50;
+  }
+}
+
+// ---------- GRADIENTE ----------
+.btn-gradient {
+  @extend .btn;
+  background: linear-gradient(135deg, $primary-500, $purple);
+  color: $text-white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+    background: linear-gradient(135deg, $primary-600, darken($purple, 10%));
+  }
+}
+
+// ---------- SOCIAL ----------
+.btn-social {
+  @extend .btn;
+  border: 1px solid $gray-200;
+  background: $bg-primary;
+  color: $text-secondary;
+  
+  &:hover:not(:disabled) {
+    background: $gray-50;
+    border-color: $gray-300;
+    transform: translateY(-1px);
+  }
+  
+  &--google {
+    &:hover:not(:disabled) {
+      border-color: #ea4335;
+      color: #ea4335;
+    }
+  }
+  
+  &--facebook {
+    &:hover:not(:disabled) {
+      border-color: #1877f2;
+      color: #1877f2;
+    }
+  }
+  
+  &--apple {
+    &:hover:not(:disabled) {
+      border-color: $gray-900;
+      color: $gray-900;
+    }
+  }
+}

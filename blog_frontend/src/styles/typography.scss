@@ -1,0 +1,326 @@
+// ===================================================
+//  SISTEMA DE TIPOGRAFÍA SIMPLETICKET v3.0
+//  Fuentes: Inter + Outfit (nueva combinación 2024)
+//  Referencias: Apple, Amazon, Shopify
+// ===================================================
+
+@import 'variables';
+
+// ---------- FUENTES ----------
+// Inter - Para textos principales (excelente legibilidad)
+// Outfit - Para títulos y display (moderno y elegante)
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// ---------- SISTEMA DE TAMAÑOS (Escala tipográfica) ----------
+$font-xs: 0.75rem;       // 12px
+$font-sm: 0.875rem;      // 14px
+$font-base: 1rem;        // 16px
+$font-lg: 1.125rem;      // 18px
+$font-xl: 1.25rem;       // 20px
+$font-2xl: 1.5rem;       // 24px
+$font-3xl: 1.875rem;     // 30px
+$font-4xl: 2.25rem;      // 36px
+$font-5xl: 3rem;         // 48px
+$font-6xl: 3.75rem;      // 60px
+$font-7xl: 4.5rem;       // 72px
+
+// ---------- PESOS DE FUENTE ----------
+$font-thin: 100;
+$font-extralight: 200;
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+$font-black: 900;
+
+// ---------- ALTURA DE LÍNEA ----------
+$leading-none: 1;
+$leading-tight: 1.25;
+$leading-snug: 1.375;
+$leading-normal: 1.5;
+$leading-relaxed: 1.625;
+$leading-loose: 2;
+
+// ---------- ESPACIADO DE LETRAS ----------
+$tracking-tighter: -0.05em;
+$tracking-tight: -0.025em;
+$tracking-normal: 0;
+$tracking-wide: 0.025em;
+$tracking-wider: 0.05em;
+$tracking-widest: 0.1em;
+
+// ===================================================
+//  CLASES DE TIPOGRAFÍA
+// ===================================================
+
+// ---------- DISPLAY / TÍTULOS PRINCIPALES ----------
+.display-1 {
+  font-family: $font-display;
+  font-size: $font-7xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-5xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-4xl;
+  }
+}
+
+.display-2 {
+  font-family: $font-display;
+  font-size: $font-6xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-4xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-3xl;
+  }
+}
+
+.display-3 {
+  font-family: $font-display;
+  font-size: $font-5xl;
+  font-weight: $font-semibold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-3xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-2xl;
+  }
+}
+
+// ---------- HEADINGS ----------
+.heading-1 {
+  font-family: $font-display;
+  font-size: $font-4xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-3xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-2xl;
+  }
+}
+
+.heading-2 {
+  font-family: $font-display;
+  font-size: $font-3xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-2xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-xl;
+  }
+}
+
+.heading-3 {
+  font-family: $font-primary;
+  font-size: $font-2xl;
+  font-weight: $font-semibold;
+  line-height: $leading-snug;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-xl;
+  }
+}
+
+.heading-4 {
+  font-family: $font-primary;
+  font-size: $font-xl;
+  font-weight: $font-semibold;
+  line-height: $leading-snug;
+  color: $text-primary;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-lg;
+  }
+}
+
+.heading-5 {
+  font-family: $font-primary;
+  font-size: $font-lg;
+  font-weight: $font-semibold;
+  line-height: $leading-normal;
+  color: $text-primary;
+}
+
+.heading-6 {
+  font-family: $font-primary;
+  font-size: $font-base;
+  font-weight: $font-semibold;
+  line-height: $leading-normal;
+  color: $text-primary;
+}
+
+// ---------- BODY TEXT ----------
+.body-large {
+  font-family: $font-primary;
+  font-size: $font-lg;
+  font-weight: $font-regular;
+  line-height: $leading-relaxed;
+  color: $text-secondary;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-base;
+  }
+}
+
+.body-base {
+  font-family: $font-primary;
+  font-size: $font-base;
+  font-weight: $font-regular;
+  line-height: $leading-relaxed;
+  color: $text-secondary;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-sm;
+  }
+}
+
+.body-small {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-regular;
+  line-height: $leading-normal;
+  color: $text-tertiary;
+}
+
+.body-xs {
+  font-family: $font-primary;
+  font-size: $font-xs;
+  font-weight: $font-regular;
+  line-height: $leading-normal;
+  color: $text-tertiary;
+}
+
+// ---------- CAPTIONS Y LABELS ----------
+.caption {
+  font-family: $font-primary;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  color: $text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: $tracking-wider;
+}
+
+.label {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  color: $text-secondary;
+}
+
+// ---------- PRECIOS ----------
+.price-hero {
+  font-family: $font-display;
+  font-size: $font-4xl;
+  font-weight: $font-bold;
+  color: $primary-600;
+  line-height: $leading-tight;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-3xl;
+  }
+}
+
+.price-large {
+  font-family: $font-display;
+  font-size: $font-2xl;
+  font-weight: $font-bold;
+  color: $primary-600;
+}
+
+.price-base {
+  font-family: $font-display;
+  font-size: $font-xl;
+  font-weight: $font-semibold;
+  color: $primary-600;
+}
+
+.price-small {
+  font-family: $font-display;
+  font-size: $font-lg;
+  font-weight: $font-semibold;
+  color: $primary-600;
+}
+
+.price-strikethrough {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $gray-400;
+  text-decoration: line-through;
+}
+
+// ---------- BOTONES ----------
+.btn-text {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-semibold;
+  letter-spacing: $tracking-wide;
+  text-transform: none;
+}
+
+.btn-text-small {
+  font-family: $font-primary;
+  font-size: $font-xs;
+  font-weight: $font-semibold;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+}
+
+// ---------- LINKS ----------
+.link {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $primary-500;
+  cursor: pointer;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $primary-600;
+    text-decoration: underline;
+  }
+}
+
+.link-large {
+  @extend .link;
+  font-size: $font-base;
+}

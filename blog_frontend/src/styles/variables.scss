@@ -1,0 +1,122 @@
+// ===================================================
+//  PALETA DE COLORES SIMPLETICKET v3.0
+//  Basado en: Amazon, Shopify, Mercado Libre 2024
+//  Diseño: Material Design 3 + Neumorphism
+// ===================================================
+
+// ---------- COLORES PRIMARIOS (Azul Corporativo) ----------
+$primary-50: #eff6ff;
+$primary-100: #dbeafe;
+$primary-200: #bfdbfe;
+$primary-300: #93c5fd;
+$primary-400: #60a5fa;
+$primary-500: #3b82f6;      // AZUL PRINCIPAL
+$primary-600: #2563eb;
+$primary-700: #1d4ed8;
+$primary-800: #1e40af;
+$primary-900: #1e3a8a;
+
+// ---------- COLORES SECUNDARIOS (Verde Éxito) ----------
+$secondary-50: #f0fdf4;
+$secondary-100: #dcfce7;
+$secondary-200: #bbf7d0;
+$secondary-300: #86efac;
+$secondary-400: #4ade80;
+$secondary-500: #22c55e;     // VERDE PRINCIPAL
+$secondary-600: #16a34a;
+$secondary-700: #15803d;
+$secondary-800: #166534;
+$secondary-900: #14532d;
+
+// ---------- COLORES DE ACENTO (Naranja/Cálido) ----------
+$accent-50: #fff7ed;
+$accent-100: #ffedd5;
+$accent-200: #fed7aa;
+$accent-300: #fdba74;
+$accent-400: #fb923c;
+$accent-500: #f97316;       // NARANJA PRINCIPAL
+$accent-600: #ea580c;
+$accent-700: #c2410c;
+$accent-800: #9a3412;
+$accent-900: #7c2d12;
+
+// ---------- COLORES DE ESTADO ----------
+$success: #22c55e;
+$warning: #f59e0b;
+$error: #ef4444;
+$info: #3b82f6;
+$purple: #8b5cf6;
+$pink: #ec4899;
+
+// ---------- COLORES NEUTROS (Escala de grises) ----------
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-500: #64748b;
+$gray-600: #475569;
+$gray-700: #334155;
+$gray-800: #1e293b;
+$gray-900: #0f172a;
+$gray-950: #020617;
+
+// ---------- COLORES DE FONDO ----------
+$bg-primary: #ffffff;
+$bg-secondary: #f8fafc;
+$bg-tertiary: #f1f5f9;
+$bg-elevated: #ffffff;
+$bg-dark: #0f172a;
+
+// ---------- COLORES DE TEXTO ----------
+$text-primary: #0f172a;
+$text-secondary: #334155;
+$text-tertiary: #64748b;
+$text-light: #94a3b8;
+$text-white: #ffffff;
+$text-disabled: #cbd5e1;
+
+// ---------- SISTEMA DE SOMBRAS (Elevación) ----------
+$shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// ---------- BORDES Y RADIOS ----------
+$radius-none: 0;
+$radius-sm: 0.25rem;      // 4px
+$radius-md: 0.5rem;       // 8px
+$radius-lg: 0.75rem;      // 12px
+$radius-xl: 1rem;         // 16px
+$radius-2xl: 1.5rem;      // 24px
+$radius-3xl: 2rem;        // 32px
+$radius-full: 9999px;
+
+// ---------- BREAKPOINTS ----------
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ---------- ESPACIADOS ----------
+$spacing-1: 0.25rem;   // 4px
+$spacing-2: 0.5rem;    // 8px
+$spacing-3: 0.75rem;   // 12px
+$spacing-4: 1rem;      // 16px
+$spacing-5: 1.25rem;   // 20px
+$spacing-6: 1.5rem;    // 24px
+$spacing-8: 2rem;      // 32px
+$spacing-10: 2.5rem;   // 40px
+$spacing-12: 3rem;     // 48px
+$spacing-16: 4rem;     // 64px
+$spacing-20: 5rem;     // 80px
+
+// ---------- TRANSICIONES ----------
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);

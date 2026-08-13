@@ -1,0 +1,638 @@
+// ===================================================
+//  SISTEMA DE CARDS SIMPLETICKET v3.0
+//  Estilos: Neumorphism + Glassmorphism
+// ===================================================
+
+@import '../variables';
+@import '../typography';
+
+// ---------- CARD BASE ----------
+.card {
+  background: $bg-primary;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition: all $transition-base;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// ---------- CARD TIPO 1: PRODUCT CARD (Amazon Style) ----------
+.product-card {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $bg-primary;
+  
+  // Badge de oferta
+  &__badge {
+    position: absolute;
+    top: $spacing-3;
+    left: $spacing-3;
+    z-index: 2;
+    background: $error;
+    color: $text-white;
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-full;
+    @extend .caption;
+    font-weight: $font-bold;
+    box-shadow: $shadow-sm;
+    
+    &--sale {
+      background: $error;
+    }
+    
+    &--new {
+      background: $success;
+    }
+    
+    &--featured {
+      background: $accent-500;
+    }
+  }
+  
+  // Imagen
+  &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%;
+    background: $gray-100;
+    cursor: pointer;
+  }
+  
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+    
+    .product-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+  
+  &__quick-view {
+    position: absolute;
+    bottom: $spacing-3;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    background: rgba($gray-900, 0.9);
+    backdrop-filter: blur(8px);
+    color: $text-white;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-full;
+    @extend .btn-text-small;
+    border: none;
+    cursor: pointer;
+    transition: all $transition-base;
+    z-index: 2;
+    white-space: nowrap;
+    
+    &:hover {
+      background: $primary-500;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  .product-card:hover & {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  // Contenido
+  &__content {
+    padding: $spacing-4;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+  
+  &__category {
+    @extend .caption;
+    color: $gray-500;
+  }
+  
+  &__title {
+    @extend .heading-5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: $leading-snug;
+    min-height: 3rem;
+  }
+  
+  // Rating
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+  
+  .stars {
+    display: inline-flex;
+    gap: 1px;
+    
+    .star {
+      color: $gray-300;
+      font-size: $font-base;
+      
+      &--filled {
+        color: $accent-500;
+      }
+      
+      &--half {
+        color: $accent-500;
+        position: relative;
+        
+        &::after {
+          content: '\f005';
+          font-family: 'Font Awesome 6 Free';
+          font-weight: 900;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 50%;
+          overflow: hidden;
+          color: $accent-500;
+        }
+      }
+    }
+  }
+  
+  &__reviews {
+    @extend .body-small;
+    color: $gray-500;
+  }
+  
+  // Precios
+  &__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-3;
+    margin-top: $spacing-1;
+  }
+  
+  &__price-current {
+    @extend .price-base;
+  }
+  
+  &__price-original {
+    @extend .price-strikethrough;
+  }
+  
+  // Envío
+  &__shipping {
+    display: flex;
+    gap: $spacing-2;
+    @extend .body-small;
+    color: $gray-500;
+    
+    .shipping-free {
+      color: $success;
+      font-weight: $font-medium;
+    }
+  }
+  
+  // Acciones
+  &__actions {
+    display: flex;
+    gap: $spacing-2;
+    margin-top: $spacing-3;
+    
+    .btn {
+      flex: 1;
+    }
+    
+    .btn-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+// ---------- CARD TIPO 2: CATEGORY CARD (Shopify Style) ----------
+.category-card {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: $shadow-sm;
+  transition: all $transition-base;
+  position: relative;
+  height: 200px;
+  
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: $shadow-xl;
+    
+    .category-card__overlay {
+      background: linear-gradient(
+        135deg,
+        rgba($primary-500, 0.7),
+        rgba($primary-700, 0.7)
+      );
+    }
+    
+    .category-card__title {
+      transform: scale(1.05);
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to top,
+      rgba($gray-900, 0.7) 0%,
+      rgba($gray-900, 0.2) 100%
+    );
+    transition: background $transition-base;
+  }
+  
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $spacing-6;
+    color: $text-white;
+    text-align: center;
+  }
+  
+  &__icon {
+    font-size: $font-3xl;
+    margin-bottom: $spacing-2;
+    display: block;
+  }
+  
+  &__title {
+    @extend .heading-4;
+    color: $text-white;
+    margin: 0;
+    transition: transform $transition-base;
+    text-shadow: 0 2px 4px rgba($gray-900, 0.3);
+  }
+  
+  &__count {
+    @extend .body-small;
+    color: rgba($text-white, 0.9);
+    margin: $spacing-1 0 0;
+  }
+}
+
+// ---------- CARD TIPO 3: ORDER CARD (Mercado Libre Style) ----------
+.order-card {
+  background: $bg-primary;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $spacing-6;
+  margin-bottom: $spacing-4;
+  transition: all $transition-base;
+  border: 1px solid $gray-100;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $gray-200;
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: $spacing-4;
+    border-bottom: 1px solid $gray-200;
+    
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-2;
+    }
+  }
+  
+  &__order-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+  }
+  
+  &__order-id {
+    @extend .heading-6;
+  }
+  
+  &__date {
+    @extend .body-small;
+    color: $gray-500;
+  }
+  
+  &__status {
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-full;
+    @extend .caption;
+    font-weight: $font-semibold;
+    
+    &--pending {
+      background: $warning;
+      color: $text-white;
+    }
+    
+    &--processing {
+      background: $info;
+      color: $text-white;
+    }
+    
+    &--shipped {
+      background: $primary-500;
+      color: $text-white;
+    }
+    
+    &--delivered {
+      background: $success;
+      color: $text-white;
+    }
+    
+    &--cancelled {
+      background: $error;
+      color: $text-white;
+    }
+    
+    &--refunded {
+      background: $purple;
+      color: $text-white;
+    }
+  }
+  
+  &__products {
+    padding: $spacing-4 0;
+    border-bottom: 1px solid $gray-200;
+  }
+  
+  &__product {
+    display: flex;
+    gap: $spacing-4;
+    padding: $spacing-2 0;
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid $gray-100;
+    }
+  }
+  
+  &__product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: $radius-md;
+    flex-shrink: 0;
+  }
+  
+  &__product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+    
+    h5 {
+      @extend .heading-6;
+      margin: 0;
+    }
+    
+    .product-meta {
+      @extend .body-small;
+      color: $gray-500;
+      display: flex;
+      gap: $spacing-4;
+    }
+  }
+  
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $spacing-4;
+    
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      gap: $spacing-4;
+      align-items: stretch;
+    }
+  }
+  
+  &__total {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-2;
+    
+    span {
+      @extend .body-base;
+      color: $gray-500;
+    }
+    
+    strong {
+      @extend .price-large;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-2;
+    
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+    }
+    
+    .btn {
+      @media (max-width: $breakpoint-sm) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// ---------- CARD TIPO 4: PROFILE CARD (Dashboard Style) ----------
+.profile-card {
+  background: $bg-primary;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-6;
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid $gray-100;
+  
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
+  }
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+    margin-bottom: $spacing-6;
+  }
+  
+  &__avatar-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+  
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: $radius-full;
+    object-fit: cover;
+    border: 3px solid $bg-primary;
+    box-shadow: $shadow-sm;
+  }
+  
+  &__status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: $radius-full;
+    border: 2px solid $bg-primary;
+    background: $gray-400;
+    
+    &--online {
+      background: $success;
+    }
+    
+    &--away {
+      background: $warning;
+    }
+    
+    &--offline {
+      background: $gray-400;
+    }
+  }
+  
+  &__user-info {
+    flex: 1;
+  }
+  
+  &__user-name {
+    @extend .heading-3;
+    margin: 0;
+  }
+  
+  &__user-email {
+    @extend .body-small;
+    color: $gray-500;
+    margin: $spacing-1 0 0;
+  }
+  
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-4;
+    padding: $spacing-4 0;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__stat {
+    text-align: center;
+  }
+  
+  &__stat-value {
+    @extend .heading-2;
+    font-size: $font-2xl;
+    display: block;
+  }
+  
+  &__stat-label {
+    @extend .caption;
+    color: $gray-500;
+    display: block;
+    margin-top: $spacing-1;
+  }
+  
+  &__actions {
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ---------- CARD TIPO 5: TESTIMONIAL CARD ----------
+.testimonial-card {
+  @extend .card;
+  padding: $spacing-6;
+  text-align: center;
+  background: $bg-secondary;
+  
+  &__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: $radius-full;
+    object-fit: cover;
+    margin: 0 auto $spacing-4;
+    border: 3px solid $primary-500;
+  }
+  
+  &__quote {
+    @extend .body-base;
+    color: $text-secondary;
+    font-style: italic;
+    position: relative;
+    
+    &::before {
+      content: '"';
+      font-size: $font-4xl;
+      color: $primary-300;
+      position: absolute;
+      top: -$spacing-4;
+      left: -$spacing-2;
+    }
+  }
+  
+  &__author {
+    @extend .heading-6;
+    margin: $spacing-4 0 0;
+  }
+  
+  &__role {
+    @extend .body-small;
+    color: $gray-500;
+  }
+  
+  &__rating {
+    margin-top: $spacing-3;
+    
+    .stars {
+      display: inline-flex;
+      gap: 2px;
+      
+      .star {
+        color: $accent-500;
+        font-size: $font-base;
+      }
+    }
+  }
+}

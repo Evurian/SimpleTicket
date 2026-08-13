@@ -1,357 +1,234 @@
-# Proyecto Web
+# 🎟️ SimpleTicket
 
+SimpleTicket es una plataforma web **full-stack** de comercio electrónico y gestión de tickets/productos diseñada bajo estándares profesionales de desarrollo de software. Combina un backend robusto, modular y seguro implementado en **Django (REST Framework)** con un frontend SPA moderno, reactivo y de alta fidelidad estética desarrollado en **Angular** y estilizado con **Tailwind CSS** y **PrimeNG**.
 
-## Instalación
-### Backend
-1. Clonar el repositorio:
+Este proyecto adopta patrones de arquitectura avanzados (Capa de Repositorio y Servicio), estrictos mecanismos de seguridad (Throttling, cabeceras seguras, CORS) y una experiencia de usuario premium (modo oscuro persistente, carrito lateral interactivo, checkout multi-paso, skeletons y seguimiento en tiempo real).
+
+---
+
+## 📸 Galería del Proyecto (Capturas de Pantalla)
+
+Aquí puedes ver la interfaz de usuario moderna y estilizada de SimpleTicket:
+
+### 🏠 Inicio y Landing Page
+![Página de Inicio - Vista Principal](./screenshoots/home1.png)
+*Vista de portada del e-commerce con promociones y diseño adaptable.*
+
+![Página de Inicio - Sección Secundaria](./screenshoots/home2.png)
+*Listado principal y secciones destacadas con micro-animaciones.*
+
+### 🛍️ Catálogo de Productos y Compra
+![Catálogo de Productos](./screenshoots/products.png)
+*Listado interactivo de productos con carrito lateral flotante y skeleton loader durante la carga.*
+
+### 🔐 Autenticación de Usuarios
+![Inicio de Sesión](./screenshoots/signin.png)
+*Formulario de inicio de sesión con validación interactiva y tema adaptado.*
+
+![Registro de Usuarios](./screenshoots/signup.png)
+*Formulario de registro intuitivo para nuevos clientes.*
+
+### ⚙️ Panel de Administración y Gestión
+![Panel de Control Administrativo](./screenshoots/admin.png)
+*Dashboard administrativo para el control de inventarios, pedidos e ingresos.*
+
+![Gestión de Usuarios](./screenshoots/users.png)
+*Panel de administración para la gestión de usuarios, roles y permisos de acceso.*
+
+---
+
+## 🛠️ Arquitectura y Características Clave
+
+### 💻 Backend (Django & DRF)
+*   **Patrón Repository & Service**: Separación estricta de la lógica de negocio y la persistencia de datos.
+    *   *Repositories*: Encapsulan las operaciones ORM de consulta (`ProductRepository`, `OrderRepository`), garantizando que la base de datos pueda ser sustituida o modificada sin afectar la lógica superior.
+    *   *Services*: Centralizan las reglas de negocio críticas (`ProductService`, `OrderService`), asegurando operaciones atómicas como la validación transaccional y la deducción automática de stock durante la creación de pedidos.
+*   **APIs Modulares**:
+    *   `api.account`: Autenticación, creación de cuentas de usuario, perfiles y tokens.
+    *   `api.products`: Listado, búsqueda, categorización y detalles de productos.
+    *   `api.orders`: Gestión segura de pedidos y seguimiento del historial de compras.
+*   **Seguridad Reforzada**:
+    *   **Rate Limiting (Throttling)**: Limitación del número de peticiones por IP y usuario para prevenir ataques de denegación de servicio (DoS) y fuerza bruta.
+    *   **Security Headers**: Configuración activa de políticas de protección como `X-Frame-Options` para evitar clickjacking, `X-Content-Type-Options` y filtros XSS.
+    *   **CORS Seguro**: Configurado para aceptar únicamente peticiones del dominio del frontend en desarrollo y producción.
+*   **Monitoreo y Observabilidad**: Logs estructurados en formato JSON para simplificar el análisis de errores en producción.
+*   **Poblamiento de Datos (Seeding)**: Comando personalizado `python manage.py seed_db` para pre-cargar categorías, stock e imágenes iniciales realistas en la base de datos de manera automatizada.
+
+### 🎨 Frontend (Angular & Tailwind CSS / PrimeNG)
+*   **Estructura Reactiva SPA**: Implementado en **Angular** empleando componentes funcionales reactivos y un flujo de comunicación basado en servicios.
+*   **Diseño Visual Premium**:
+    *   **Tipografía de Vanguardia**: Uso de *Outfit* para títulos (display moderno) e *Inter* para lectura (alta legibilidad), importadas directamente de Google Fonts.
+    *   **Paleta de Colores Curada**: Variables Sass que definen una escala cromática profesional basada en marcas líderes como Shopify y Mercado Libre.
+    *   **Modo Oscuro/Claro Nativo**: `ThemeService` sincronizado con Tailwind CSS y persistencia automática en el navegador a través de `localStorage`.
+    *   **Diseño Neumórfico y Glassmorphism**: Cards de productos con elevación dinámica, desenfoque de fondo en modales y transiciones fluidas de hover.
+*   **Experiencia de Compra Interactiva**:
+    *   **Carrito Lateral Persistente**: Panel lateral deslizante (Drawer Panel) gestionado por `CartService` que permite modificar cantidades y eliminar artículos sin recargar la página.
+    *   **Wizard Checkout**: Proceso de compra guiado paso a paso con validaciones dinámicas de formularios en tiempo real.
+    *   **Línea de Tiempo del Pedido (Order Tracker)**: Componente visual interactivo para que los usuarios monitoreen si su pedido está `PENDIENTE`, `ENVIADO` o `ENTREGADO`.
+    *   **Skeleton Loaders**: Efecto de carga shimmer que reduce la percepción del tiempo de espera del usuario.
+
+---
+
+## 📁 Estructura del Código
+
+```plaintext
+SimpleTicket/
+│
+├── blog_backend/              # Servidor Backend (Django)
+│   ├── api/                   # Módulos de la API REST
+│   │   ├── account/           # Autenticación y Perfil de Usuario
+│   │   ├── products/          # Repositorio, Servicio y Endpoints de Productos
+│   │   └── orders/            # Repositorio, Servicio y Endpoints de Pedidos
+│   │
+│   ├── blog_backend/          # Configuración del Proyecto (Settings, URLs, Logs)
+│   ├── requirements.txt       # Dependencias de Python
+│   └── manage.py              # Gestor de Comandos Django
+│
+├── blog_frontend/             # Servidor Frontend (Angular 20 SPA)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/    # Home, Header, Footer, List (Catálogo), Detail, Profile
+│   │   │   └── services/      # CartService, ThemeService, ListaService, Accounts
+│   │   │
+│   │   ├── styles/            # Sistema de Estilos SCSS
+│   │   │   ├── variables.scss # Paleta de colores, sombras y espaciados
+│   │   │   ├── typography.scss# Fuentes (Outfit & Inter) y clases tipográficas
+│   │   │   ├── buttons.scss   # Estilizado de botones neumórficos
+│   │   │   └── styles.sass    # Estilo global de la aplicación
+│   │   │
+│   │   └── main.ts            # Punto de entrada de la aplicación Angular
+│   │
+│   ├── angular.json           # Configuración del compilador y assets
+│   ├── package.json           # Scripts de npm y dependencias del frontend
+│   └── tailwind.config.js     # Configuración de Tailwind CSS
+│
+└── screenshoots/              # Capturas de pantalla e imágenes de documentación
+```
+
+---
+
+## 🚀 Instalación y Configuración Paso a Paso
+
+### Requisitos del Sistema
+*   **Python 3.10+**
+*   **Node.js (v18+)** e **npm (v9+)**
+
+---
+
+### 1. Servidor Backend (Django)
+
+1.  **Ingresar al directorio de backend**:
     ```bash
-    git clone [URL del repositorio Backend]
-    cd [directorio Backend]
+    cd blog_backend
     ```
-2. Crear y activar el entorno virtual:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # En Windows: venv\Scripts\activate
-    ```
-3. Instalar las dependencias:
+
+2.  **Configurar el entorno virtual**:
+    *   En Windows:
+        ```bash
+        python -m venv venv
+        .\venv\Scripts\activate
+        ```
+    *   En macOS o Linux:
+        ```bash
+        python3 -m venv venv
+        source venv/bin/activate
+        ```
+
+3.  **Instalar dependencias**:
     ```bash
     pip install -r requirements.txt
     ```
-4. Configurar las variables de entorno en un archivo `.env` en la raíz del proyecto:
+
+4.  **Configurar variables de entorno**:
+    Crea un archivo llamado `.env` en la raíz del directorio `blog_backend/` y define lo siguiente:
+    ```env
+    SECRET_KEY=tu-clave-secreta-personalizada
+    DEBUG=True
+    ALLOWED_HOSTS=localhost,127.0.0.1
     ```
-    SECRET_KEY=your_secret_key
-    DATABASE_ENGINE=django.db.backends.postgresql
-    DATABASE_NAME=your_db_name
-    DATABASE_USER=your_db_user
-    DATABASE_PASSWORD=your_db_password
-    DATABASE_HOST=your_db_host
-    DATABASE_PORT=your_db_port
-    ```
-5. Migrar la base de datos:
+
+5.  **Preparar y Sembrar la Base de Datos**:
     ```bash
     python manage.py migrate
+    python manage.py seed_db
     ```
-6. Crear un superusuario para acceder al admin:
+
+6.  **Crear un Superusuario para el Panel de Administración (Opcional)**:
     ```bash
     python manage.py createsuperuser
     ```
-7. Correr el servidor de desarrollo:
+
+7.  **Iniciar el servidor de desarrollo**:
     ```bash
     python manage.py runserver
     ```
+    *El backend estará disponible en: `http://localhost:8000/`*
 
-### Frontend
-1. Clonar el repositorio:
+---
+
+### 2. Servidor Frontend (Angular)
+
+1.  **Ingresar al directorio de frontend**:
     ```bash
-    git clone [URL del repositorio Frontend]
-    cd [directorio Frontend]
+    cd ../blog_frontend
     ```
-2. Instalar las dependencias:
+
+2.  **Instalar dependencias de Node**:
     ```bash
     npm install
     ```
-3. Iniciar la aplicación:
+
+3.  **Iniciar el servidor de desarrollo**:
     ```bash
     npm start
     ```
 
-## Uso
-### Backend
-1. Ejecutar el servidor de desarrollo:
-    ```bash
-    python manage.py runserver
-    ```
-2. Acceder a la interfaz de administración:
-    ```plaintext
-    http://127.0.0.1:8000/admin
-    ```
-3. Usar las credenciales del superusuario creado para iniciar sesión.
-
-### Frontend
-1. Ejecutar el servidor de desarrollo:
-    ```bash
-    npm start
-    ```
-2. Acceder a la aplicación en:
-    ```plaintext
-    http://localhost:4200
-    ```
-
-
-# Simpleticket
-
-## Descripción General
-
-Simpleticket es una aplicación web diseñada para facilitar la gestión y el pedido de productos desde la comodidad del hogar. Utiliza Django para el backend y Angular para el frontend, ofreciendo una experiencia de usuario fluida y eficiente.
-
-### Página de Inicio
-
-La página de inicio de Simpleticket está diseñada para dar la bienvenida a los usuarios y destacar las categorías populares y las ofertas especiales. Incluye las siguientes secciones:
-
-- **Banner de Bienvenida**: Presenta el nombre de la aplicación y un botón de llamada a la acción para hacer pedidos.
-- **Categorías Populares**: Muestra una selección de categorías como Comida, Electrónica y Ropa, cada una con una imagen representativa.
-- **Ofertas Especiales**: Presenta promociones actuales en diferentes categorías de productos.
-
-## Instalación y Configuración
-
-### Requisitos
-
-- Python 3.x
-- Node.js y npm
-- PostgreSQL (o cualquier otra base de datos compatible con Django)
-
-### Backend (Django)
-
-1. **Clonar el repositorio**:
-    ```bash
-    git clone [URL del repositorio Backend]
-    cd [directorio Backend]
-    ```
-
-2. **Crear y activar el entorno virtual**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # En Windows: venv\Scripts\activate
-    ```
-
-3. **Instalar las dependencias**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Configurar las variables de entorno** en un archivo `.env` en la raíz del proyecto:
-    ```
-    SECRET_KEY=your_secret_key
-    DATABASE_ENGINE=django.db.backends.postgresql
-    DATABASE_NAME=your_db_name
-    DATABASE_USER=your_db_user
-    DATABASE_PASSWORD=your_db_password
-    DATABASE_HOST=your_db_host
-    DATABASE_PORT=your_db_port
-    EMAIL_HOST_USER=your_email
-    EMAIL_HOST_PASSWORD=your_email_password
-    ```
-
-5. **Migrar la base de datos**:
-    ```bash
-    python manage.py migrate
-    ```
-
-6. **Crear un superusuario**:
-    ```bash
-    python manage.py createsuperuser
-    ```
-
-7. **Correr el servidor de desarrollo**:
-    ```bash
-    python manage.py runserver
-    ```
-
-### Frontend (Angular)
-
-1. **Clonar el repositorio**:
-    ```bash
-    git clone [URL del repositorio Frontend]
-    cd [directorio Frontend]
-    ```
-
-2. **Instalar las dependencias**:
-    ```bash
-    npm install
-    ```
-
-3. **Correr el servidor de desarrollo**:
-    ```bash
-    ng serve
-    ```
-
-## API REST
-
-### Endpoints
-
-#### Registro de Usuario (SignUp)
-
-- **URL**: `/api/signup/`
-- **Método**: `POST`
-- **Descripción**: Registra un nuevo usuario y envía un correo de bienvenida.
-- **Datos de Entrada**:
-    ```json
-    {
-        "username": "user1",
-        "password": "password123",
-        "confirm_password": "password123",
-        "email": "user1@example.com"
-    }
-    ```
-- **Respuesta Exitosa**:
-    ```json
-    {
-        "username": "user1",
-        "email": "user1@example.com"
-    }
-    ```
-
-#### Inicio de Sesión (SignIn)
-
-- **URL**: `/api/signin/`
-- **Método**: `POST`
-- **Descripción**: Autentica al usuario y retorna un token de autenticación.
-- **Datos de Entrada**:
-    ```json
-    {
-        "username": "user1",
-        "password": "password123"
-    }
-    ```
-- **Respuesta Exitosa**:
-    ```json
-    {
-        "token": "your_auth_token"
-    }
-    ```
-
-#### Perfil del Usuario (Profile)
-
-- **URL**: `/api/profile/`
-- **Método**: `GET`
-- **Descripción**: Retorna la información del perfil del usuario autenticado.
-- **Cabeceras**:
-    ```http
-    Authorization: Token your_auth_token
-    ```
-- **Respuesta Exitosa**:
-    ```json
-    {
-        "username": "user1",
-        "first_name": "",
-        "last_name": "",
-        "date_joined": "2023-07-22T10:00:00Z",
-        "is_staff": false,
-        "is_superuser": false
-    }
-    ```
-
-#### Actualización del Perfil (Profile Update)
-
-- **URL**: `/api/profile/update/`
-- **Método**: `PUT`
-- **Descripción**: Actualiza la información del perfil del usuario autenticado.
-- **Cabeceras**:
-    ```http
-    Authorization: Token your_auth_token
-    ```
-- **Datos de Entrada**:
-    ```json
-    {
-        "first_name": "John",
-        "last_name": "Doe"
-    }
-    ```
-- **Respuesta Exitosa**:
-    ```json
-    {
-        "username": "user1",
-        "first_name": "John",
-        "last_name": "Doe",
-        "date_joined": "2023-07-22T10:00:00Z",
-        "is_staff": false,
-        "is_superuser": false
-    }
-    ```
-
-## Hosting y Despliegue
-
-El proyecto está desplegado en una URL en la nube con HTTPS y un nombre de dominio propio. Puedes acceder a la aplicación utilizando las siguientes credenciales para probar las funcionalidades CRUD:
-
-- **Usuario**: admin
-- **Contraseña**: 1234
-
-## Video Demostrativo
-
-•	https://drive.google.com/file/d/1kAJWRSjXIEY0HoomKr2Ha9TekdrQjx67/view?usp=sharing
-
-## Recomendaciones y Conclusiones
-
-- **Recomendaciones**:
-  - Implementar pruebas automatizadas para garantizar la calidad del código.
-  - Optimizar las consultas a la base de datos para mejorar el rendimiento.
-  - Considerar la implementación de un sistema de caché para reducir la carga en el servidor.
-
-- **Conclusiones**:
-  - Simpleticket proporciona una solución eficiente para la gestión de pedidos y productos.
-  - La integración de Django y Angular permite una experiencia de usuario fluida y reactiva.
-  - La estructura modular del código facilita el mantenimiento y la escalabilidad del proyecto.
-A continuación, te proporciono el contenido de un `README.md` para la parte del frontend de tu proyecto "Simpleticket", incluyendo consideraciones, interfaces y pantallazos del sistema:
-
-# Simpleticket Frontend
-
-## Descripción General
-
-El frontend de Simpleticket está construido con Angular y proporciona una interfaz de usuario atractiva y fácil de usar para gestionar pedidos y productos. La estructura del proyecto sigue una arquitectura modular que facilita la escalabilidad y el mantenimiento.
-
-## Estructura del Proyecto
-
-La estructura de carpetas del proyecto es la siguiente:
-
-### Componentes
-
-- **footer**: Componente del pie de página.
-- **header**: Componente del encabezado.
-- **home**: Componente de la página de inicio.
-- **list**: Componente de la lista de productos.
-- **profile**: Componente del perfil de usuario.
-- **sign-in**: Componente de inicio de sesión.
-- **sign-up**: Componente de registro.
-- **welcome**: Componente de bienvenida.
-
-### Interfaces
-
-- **productos.ts**: Definiciones de interfaces para los productos.
-
-### Servicios
-
-- **lista.service.ts**: Servicio para manejar la lista de productos.
-- **accounts**:
-  - **profile.service.ts**: Servicio para manejar el perfil de usuario.
-  - **user.service.ts**: Servicio para manejar los usuarios.
-  - **guard**:
-    - **guest-guard-service.service.ts**: Guard para usuarios invitados.
-    - **user-guard-service.service.ts**: Guard para usuarios autenticados.
-  - **session**:
-    - **session-service.service.ts**: Servicio para manejar las sesiones.
-  - **sign-in**:
-    - **sign-in.service.ts**: Servicio para manejar el inicio de sesión.
-  - **sign-up**:
-    - **sign-up.service.ts**: Servicio para manejar el registro de usuarios.
-## Pantallazos del Sistema
-
-### Página de Inicio
-
-![Página de Inicio](screenshoots/home1.png)
-![Página de Inicio](screenshoots/home2.png)
-
-### Registro de Usuario
-
-![Registro de Usuario](screenshoots/signup.png)
-
-### Inicio de Sesión
-
-![Inicio de Sesión](screenshoots/signin.png)
-
-### Perfil de Usuario
-
-![Perfil de Usuario](screenshoots/profile.png)
-
-### Lista de Productos
-
-![Lista de Productos](screenshoots/products.png)
-
-### Django Administracion 
-
-![Users](screenshoots/users.png)
-
-
-
-
-
-
+4.  **Acceder a la aplicación**:
+    Abre tu navegador e ingresa a: `http://localhost:4200`
+
+---
+
+## 📡 Detalle de la API REST
+
+Todos los endpoints del backend están prefijados con `/api`. Los endpoints protegidos requieren el envío de la cabecera `Authorization: Token <token>`.
+
+| Módulo | Endpoint | Método HTTP | Auth Requerido | Descripción |
+| :--- | :--- | :---: | :---: | :--- |
+| **Cuentas** | `/api/signup/` | `POST` | No | Registra un nuevo usuario en la plataforma. |
+| **Cuentas** | `/api/signin/` | `POST` | No | Inicia sesión y retorna el token de autenticación. |
+| **Cuentas** | `/api/profile/` | `GET` | Sí | Obtiene los detalles de perfil del usuario autenticado. |
+| **Cuentas** | `/api/profile/update/` | `PUT` | Sí | Actualiza los datos del perfil (dirección, nombre, etc.). |
+| **Productos** | `/api/products/` | `GET` | No | Retorna el listado completo de productos (soporta filtros). |
+| **Productos** | `/api/products/<id>/` | `GET` | No | Retorna el detalle completo de un producto por su ID. |
+| **Pedidos** | `/api/orders/` | `GET` | Sí | Retorna el historial de compras del usuario autenticado. |
+| **Pedidos** | `/api/orders/` | `POST` | Sí | Procesa y registra un nuevo pedido de compra. |
+
+#### Ejemplo de Cuerpo de Petición para crear un Pedido (`POST /api/orders/`):
+```json
+{
+  "items": [
+    {"product_id": 1, "quantity": 2},
+    {"product_id": 3, "quantity": 1}
+  ],
+  "shipping_address": "Calle Falsa 123, Ciudad de Primavera"
+}
+```
+
+---
+
+## 🧪 Pruebas Automatizadas y Calidad
+
+### Pruebas de Backend
+Para ejecutar los tests automatizados que validan la lógica de negocio en la capa de servicios y la integridad del repositorio:
+```bash
+cd blog_backend
+.\venv\Scripts\activate  # En Windows
+python manage.py test
+```
+
+### Compilación y Calidad en Frontend
+Para validar que el tipado de TypeScript sea consistente y compilar el proyecto optimizando los assets estáticos:
+```bash
+cd blog_frontend
+npm run build
+```

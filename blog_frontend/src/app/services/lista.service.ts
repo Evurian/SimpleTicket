@@ -9,6 +9,7 @@ export interface Productos {
   category: string;
   description: string;
   image: string;
+  stock: number;
 }
 
 @Injectable({
@@ -16,7 +17,7 @@ export interface Productos {
 })
 export class ListaService {
 
-  private apiUrl = 'https://fakestoreapi.com/products';
+  private apiUrl = 'http://localhost:8000/api/products/';
 
   constructor(private http: HttpClient) { }
   

@@ -1,42 +1,224 @@
 <app-header></app-header>
 
-<section id="profileSection1">
-    <div id="profileSection1Container">
-        <div id="profileSection1Content">
-            <div *ngIf="profile" id="profileSection1ContentHead">
-                <img src="https://via.placeholder.com/150" alt="pictureProfile">
-                <div>
-                    <h1>{{ profile.username }}</h1>
-                    <button routerLinkActive="active">
-                        <a [routerLink]="['/profile/edit']">
-                            Edit profile
-                        </a>
-                    </button>
-                </div>
-            </div>
-            <div *ngIf="profile" id="profileSection1ContentBody">
-                <h2>Additional Information</h2>
-                <div id="profileSection1ContentBodyDiv">
-                    <div>
-                        <h3>Date joined</h3>
-                        <p class="text-gray-800">{{ profile.date_joined | date }}</p>
-                    </div>
-                    <div>
-                        <h3>First name</h3>
-                        <p class="text-gray-800">{{ profile.first_name }}</p>
-                    </div>
-                    <div>
-                        <h3>Last name</h3>
-                        <p class="text-gray-800">{{ profile.last_name }}</p>
-                    </div>
-                    <div>
-                        <h3>Role</h3>
-                        <p class="font-bold" [ngClass]="getUserRoleClass()">{{ role }}</p>
-                    </div>
-                </div>
-            </div>
+<div class="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 py-8">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+    <!-- User Profile Header Card -->
+    <div class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm mb-8">
+      <div class="flex flex-col md:flex-row items-center gap-6" *ngIf="profile">
+        
+        <!-- Avatar -->
+        <div class="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-3xl font-extrabold text-indigo-650 ring-4 ring-indigo-100 dark:bg-indigo-950 dark:text-indigo-400 dark:ring-indigo-900/30">
+          {{ profile.username.substring(0,2).toUpperCase() }}
         </div>
+
+        <!-- Info -->
+        <div class="flex-1 text-center md:text-left space-y-2">
+          <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-50">{{ profile.username }}</h1>
+            <span class="inline-flex items-center self-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300">
+              {{ role }}
+            </span>
+          </div>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Miembro desde el {{ profile.date_joined | date:'longDate' }}</p>
+        </div>
+
+        <!-- Edit Profile Panel / Button -->
+        <div class="w-full md:w-auto">
+          <button *ngIf="!editMode" (click)="startEdit()" class="w-full md:w-auto px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-850 transition">
+            Editar Perfil
+          </button>
+        </div>
+      </div>
+
+      <!-- Edit Form (when editMode is true) -->
+      <div *ngIf="editMode" class="mt-6 border-t border-slate-100 pt-6 dark:border-slate-800 space-y-4">
+        <h3 class="font-bold text-sm text-slate-500 uppercase tracking-wider dark:text-slate-400">Actualizar Información</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-2 dark:text-slate-400">Nombre</label>
+            <input 
+              type="text" 
+              [(ngModel)]="firstName" 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-950" 
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-2 dark:text-slate-400">Apellido</label>
+            <input 
+              type="text" 
+              [(ngModel)]="lastName" 
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-950" 
+            />
+          </div>
+        </div>
+
+        <div *ngIf="updateError" class="p-3 bg-rose-50 text-rose-600 text-xs font-semibold rounded-xl border border-rose-100 dark:bg-rose-950/20 dark:border-rose-900/30">
+          {{ updateError }}
+        </div>
+
+        <div class="flex justify-end gap-3 mt-4">
+          <button (click)="cancelEdit()" [disabled]="isUpdating" class="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 dark:border-slate-800 disabled:opacity-50">Cancelar</button>
+          <button (click)="saveProfile()" [disabled]="isUpdating" class="px-5 py-2 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-500 disabled:opacity-50 flex items-center gap-2">
+            <span *ngIf="isUpdating" class="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            <span>Guardar Cambios</span>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="updateSuccess" class="mt-4 p-3 bg-emerald-50 text-emerald-600 text-xs font-semibold rounded-xl border border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-900/30">
+        ¡Perfil actualizado con éxito!
+      </div>
     </div>
-</section>
+
+    <!-- Main Section: Orders Split View -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left Panel: Orders List -->
+      <div class="lg:col-span-1 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <i class="pi pi-receipt text-indigo-600 dark:text-indigo-400"></i>
+          <span>Historial de Pedidos</span>
+        </h2>
+
+        <div class="flex-1 overflow-y-auto space-y-3 max-h-[500px] pr-2">
+          <div *ngIf="orders.length === 0" class="py-12 text-center text-slate-400 dark:text-slate-650">
+            <i class="pi pi-shopping-bag text-4xl mb-3"></i>
+            <p class="text-sm">Aún no has realizado ningún pedido.</p>
+          </div>
+
+          <div *ngFor="let order of orders" 
+               (click)="selectOrder(order)"
+               [ngClass]="selectedOrder?.id === order.id ? 'border-indigo-600 bg-indigo-50/20 dark:border-indigo-500 dark:bg-indigo-950/20' : 'border-slate-100 hover:border-slate-350 dark:border-slate-800 dark:hover:border-slate-700'"
+               class="cursor-pointer p-4 rounded-2xl border transition flex flex-col justify-between gap-3">
+            
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Pedido #{{ order.id }}</span>
+                <p class="text-xs text-slate-400 mt-0.5">{{ order.created_at | date:'short' }}</p>
+              </div>
+              
+              <!-- Status Badge -->
+              <span [ngClass]="{
+                'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400': order.status === 'PENDING',
+                'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400': order.status === 'SHIPPED',
+                'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400': order.status === 'DELIVERED'
+              }" class="px-2.5 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                {{ getOrderStatusText(order.status) }}
+              </span>
+            </div>
+
+            <div class="flex justify-between items-center mt-1 pt-2 border-t border-slate-100/50 dark:border-slate-800/50">
+              <span class="text-xs text-slate-500 dark:text-slate-400">{{ order.items.length }} Artículos</span>
+              <span class="text-sm font-extrabold text-indigo-650 dark:text-indigo-400">{{ order.total_price | currency }}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Selected Order Detail & Tracker -->
+      <div class="lg:col-span-2 space-y-6">
+        
+        <div *ngIf="selectedOrder" class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <h2 class="text-xl font-bold">Detalle del Pedido #{{ selectedOrder.id }}</h2>
+              <p class="text-xs text-slate-400 mt-0.5">Realizado el {{ selectedOrder.created_at | date:'medium' }}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Total:</span>
+              <span class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">{{ selectedOrder.total_price | currency }}</span>
+            </div>
+          </div>
+
+          <!-- Timeline Tracking -->
+          <div class="bg-slate-50 dark:bg-slate-950/50 rounded-2xl p-5 border border-slate-100 dark:border-slate-850">
+            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-6 dark:text-slate-450">Seguimiento de Envío</h3>
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative">
+              <!-- Connector line -->
+              <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 sm:left-0 sm:right-0 sm:top-5 sm:bottom-auto sm:w-auto sm:h-0.5 z-0">
+                <div [ngClass]="{
+                  'w-0': getOrderStep(selectedOrder.status) === 1,
+                  'sm:w-1/2 h-full sm:h-auto': getOrderStep(selectedOrder.status) === 2,
+                  'w-full h-full sm:h-auto': getOrderStep(selectedOrder.status) === 3
+                }" class="bg-indigo-600 dark:bg-indigo-500 transition-all duration-500"></div>
+              </div>
+
+              <!-- Step 1 -->
+              <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
+                <span class="h-9 w-9 rounded-full flex items-center justify-center bg-indigo-600 text-white font-bold text-sm shadow-md ring-4 ring-indigo-100 dark:ring-indigo-950">
+                  <i class="pi pi-receipt"></i>
+                </span>
+                <div class="text-left sm:text-center">
+                  <p class="text-xs font-bold">Recibido</p>
+                  <p class="text-[10px] text-slate-400">Pedido aprobado</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
+                <span [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'bg-indigo-600 text-white ring-4 ring-indigo-100 dark:ring-indigo-950' : 'bg-slate-200 text-slate-500'" class="h-9 w-9 rounded-full flex items-center justify-center font-bold text-sm">
+                  <i class="pi pi-truck"></i>
+                </span>
+                <div class="text-left sm:text-center">
+                  <p class="text-xs font-bold" [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400'">En camino</p>
+                  <p class="text-[10px] text-slate-400">Despachado</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
+                <span [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'bg-emerald-600 text-white ring-4 ring-emerald-100 dark:ring-emerald-950' : 'bg-slate-200 text-slate-500'" class="h-9 w-9 rounded-full flex items-center justify-center font-bold text-sm">
+                  <i class="pi pi-home"></i>
+                </span>
+                <div class="text-left sm:text-center">
+                  <p class="text-xs font-bold" [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400'">Entregado</p>
+                  <p class="text-[10px] text-slate-400">Completado</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Items Detail -->
+          <div class="space-y-3">
+            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider dark:text-slate-400">Artículos Comprados</h3>
+            
+            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+              <div *ngFor="let item of selectedOrder.items" class="flex items-center gap-4 py-3 first:pt-0 last:pb-0">
+                <img [src]="item.product.image" class="h-12 w-12 object-contain bg-slate-50 dark:bg-slate-950 p-1.5 rounded-lg border border-slate-100 dark:border-slate-850" />
+                <div class="flex-1">
+                  <h4 class="font-semibold text-sm line-clamp-1 dark:text-slate-200">{{ item.product.title }}</h4>
+                  <p class="text-xs text-slate-400 mt-0.5">Cantidad: {{ item.quantity }}</p>
+                </div>
+                <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">{{ (item.price * item.quantity) | currency }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping Address info -->
+          <div class="border-t border-slate-100 dark:border-slate-800 pt-4">
+            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-2 dark:text-slate-400">Dirección de Entrega</h3>
+            <p class="text-sm text-slate-650 dark:text-slate-350 bg-slate-50 dark:bg-slate-950/20 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+              {{ selectedOrder.shipping_address }}
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Detail Empty State -->
+        <div *ngIf="!selectedOrder" class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-12 text-center text-slate-400 dark:text-slate-650">
+          <i class="pi pi-receipt text-5xl mb-4"></i>
+          <h3 class="text-lg font-bold">Selecciona un pedido</h3>
+          <p class="text-sm mt-1 max-w-sm mx-auto">Selecciona cualquiera de tus pedidos de la lista de la izquierda para ver su detalle de artículos y seguimiento.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
 <app-footer></app-footer>
