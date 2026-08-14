@@ -60,3 +60,43 @@ def profileUpdate(request):
         serializer.save()
         return Response(serializer.data, status = status.HTTP_200_OK)
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+# Admin User Management
+from django.contrib.auth.models import User
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def admin_users_list(request):
+    if not request.user or not request.user.is_staff:
+        return Response({'detail': 'You do not have permission to perform this action.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    users = User.objects.all().order_by('id')
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def admin_user_detail(request, pk):
+    if not request.user or not request.user.is_staff:
+        return Response({'detail': 'You do not have permission to perform this action.'}, status=status.HTTP_403_FORBIDDEN)
+        
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+    if request.method == 'PUT':
+        if user == request.user and 'is_staff' in request.data and not request.data['is_staff']:
+            return Response({'error': 'You cannot remove your own staff status.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    elif request.method == 'DELETE':
+        if user == request.user:
+            return Response({'error': 'You cannot delete yourself.'}, status=status.HTTP_400_BAD_REQUEST)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

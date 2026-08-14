@@ -14,6 +14,7 @@
       <a routerLink="/home" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Inicio</a>
       <a routerLink="/list" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Productos</a>
       <a *ngIf="isLoggedIn" routerLink="/profile" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Mi Perfil</a>
+      <a *ngIf="isLoggedIn && isAdmin" routerLink="/admin" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Administración</a>
     </nav>
 
     <!-- Right Side Actions -->
