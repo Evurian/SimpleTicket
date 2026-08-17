@@ -1,23 +1,22 @@
 <app-header></app-header>
 
-<div class="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+<div class="min-h-screen bg-[#F9FAFB] text-[#111827] dark:bg-[#0B0F19] dark:text-white transition-colors duration-300 font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
   
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-violet-900 px-6 py-24 text-center text-white sm:px-12 sm:py-32">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.15),transparent)]"></div>
+  <section class="relative overflow-hidden bg-white dark:bg-[#111827] border-b border-gray-200 dark:border-slate-800 px-6 py-20 text-center sm:px-12 sm:py-28">
     <div class="relative mx-auto max-w-3xl space-y-6">
-      <span class="inline-flex items-center rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-300 ring-1 ring-inset ring-indigo-400/20">
-        Bienvenido a SimpleTicket
+      <span class="inline-flex items-center rounded-sm bg-[#3B82F6]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#3B82F6] font-['Anonymous_Pro',monospace]">
+        BIENVENIDO A SIMPLETICKET
       </span>
-      <h1 class="display-1 text-white">
+      <h1 class="text-4xl sm:text-5xl font-light text-[#111827] dark:text-white leading-tight tracking-tight max-w-2xl mx-auto font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
         Los mejores productos, justo a tu puerta
       </h1>
-      <p class="body-large mx-auto max-w-xl text-indigo-150">
+      <p class="text-gray-500 dark:text-gray-400 text-base sm:text-lg font-light max-w-xl mx-auto">
         Explora nuestro catálogo de productos seleccionados de alta calidad con envíos exprés a todo el país.
       </p>
       <div class="pt-4">
-        <a routerLink="/list" class="btn-gradient btn--lg">
-          <i class="fa-solid fa-bag-shopping"></i>
+        <a routerLink="/list" class="inline-flex items-center justify-center gap-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium py-3 px-6 rounded-sm transition-all duration-200 text-sm tracking-wide font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
+          <i class="fa-solid fa-bag-shopping text-sm"></i>
           <span>¡Ordena Ahora!</span>
         </a>
       </div>
@@ -25,86 +24,91 @@
   </section>
 
   <!-- Popular Categories Section -->
-  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <h2 class="heading-2">Categorías Populares</h2>
-      <p class="body-base">Explora productos organizados por tus categorías favoritas.</p>
+  <section class="mx-auto max-w-7xl px-6 py-20 sm:px-8">
+    <div class="text-center mb-12">
+      <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-[#8B5CF6] uppercase tracking-widest block mb-2">CATÁLOGO</span>
+      <h2 class="text-3xl font-light text-[#111827] dark:text-white tracking-tight">Categorías Populares</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">Explora productos organizados por tus categorías favoritas.</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
       <!-- Category 1 -->
-      <a routerLink="/list" [queryParams]="{category: 'electronics'}" class="category-card">
-        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop" alt="Electrónica" class="category-card__image" />
-        <div class="category-card__overlay"></div>
-        <div class="category-card__content">
-          <i class="fa-solid fa-laptop-code category-card__icon"></i>
-          <h3 class="category-card__title">Electrónica</h3>
-          <p class="category-card__count">Equipos y gadgets modernos</p>
+      <a routerLink="/list" [queryParams]="{category: 'electronics'}" 
+         class="group relative block overflow-hidden rounded-md border border-gray-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B82F6] dark:hover:border-[#3B82F6] h-[220px]">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop" alt="Electrónica" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white text-center">
+          <i class="fa-solid fa-laptop-code text-2xl text-[#3B82F6] mb-2 block"></i>
+          <h3 class="text-lg font-medium text-white">Electrónica</h3>
+          <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-300 uppercase tracking-wider mt-1">Equipos y gadgets modernos</p>
         </div>
       </a>
 
       <!-- Category 2 -->
-      <a routerLink="/list" [queryParams]="{category: 'jewelery'}" class="category-card">
-        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=600&auto=format&fit=crop" alt="Joyería" class="category-card__image" />
-        <div class="category-card__overlay"></div>
-        <div class="category-card__content">
-          <i class="fa-solid fa-gem category-card__icon"></i>
-          <h3 class="category-card__title">Joyería</h3>
-          <p class="category-card__count">Anillos y accesorios premium</p>
+      <a routerLink="/list" [queryParams]="{category: 'jewelery'}" 
+         class="group relative block overflow-hidden rounded-md border border-gray-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B82F6] dark:hover:border-[#3B82F6] h-[220px]">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=600&auto=format&fit=crop" alt="Joyería" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white text-center">
+          <i class="fa-solid fa-gem text-2xl text-[#8B5CF6] mb-2 block"></i>
+          <h3 class="text-lg font-medium text-white">Joyería</h3>
+          <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-300 uppercase tracking-wider mt-1">Anillos y accesorios premium</p>
         </div>
       </a>
 
       <!-- Category 3 -->
-      <a routerLink="/list" class="category-card">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" alt="Moda" class="category-card__image" />
-        <div class="category-card__overlay"></div>
-        <div class="category-card__content">
-          <i class="fa-solid fa-shirt category-card__icon"></i>
-          <h3 class="category-card__title">Ropa</h3>
-          <p class="category-card__count">Lo último en tendencias de moda</p>
+      <a routerLink="/list" 
+         class="group relative block overflow-hidden rounded-md border border-gray-200 dark:border-slate-800 bg-white dark:bg-[#111827] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B82F6] dark:hover:border-[#3B82F6] h-[220px]">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" alt="Moda" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white text-center">
+          <i class="fa-solid fa-shirt text-2xl text-[#16A34A] mb-2 block"></i>
+          <h3 class="text-lg font-medium text-white">Ropa</h3>
+          <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-300 uppercase tracking-wider mt-1">Lo último en tendencias de moda</p>
         </div>
       </a>
     </div>
   </section>
 
   <!-- Offers Section -->
-  <section class="bg-slate-100 dark:bg-slate-900 py-16 transition-colors duration-300">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10">
-        <h2 class="heading-2">Ofertas Especiales</h2>
-        <p class="body-base">Aprovecha nuestros descuentos y promociones exclusivas de la temporada.</p>
+  <section class="bg-white dark:bg-[#111827] border-y border-gray-200 dark:border-slate-800 py-20 transition-colors duration-300">
+    <div class="mx-auto max-w-7xl px-6 sm:px-8">
+      <div class="text-center mb-12">
+        <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-[#16A34A] uppercase tracking-widest block mb-2">PROMOCIONES</span>
+        <h2 class="text-3xl font-light text-[#111827] dark:text-white tracking-tight">Ofertas Especiales</h2>
+        <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">Aprovecha nuestros descuentos y promociones exclusivas de la temporada.</p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
         <!-- Offer 1 -->
-        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950 transition duration-300 hover:shadow-lg">
-          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-650 dark:bg-indigo-950 dark:text-indigo-400 mb-4">
-            <i class="fa-solid fa-percent text-xl"></i>
+        <div class="overflow-hidden rounded-md border border-gray-200 bg-[#F9FAFB] p-6 shadow-sm dark:border-slate-800 dark:bg-[#0B0F19] transition duration-300 hover:border-[#3B82F6]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-sm bg-[#3B82F6]/10 text-[#3B82F6] mb-4">
+            <i class="fa-solid fa-percent text-lg"></i>
           </div>
-          <h3 class="heading-4">20% de Descuento</h3>
-          <p class="body-small mt-2">
+          <h3 class="text-lg font-medium text-[#111827] dark:text-white">20% de Descuento</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">
             Aplica un 20% de descuento en la sección de joyería premium durante esta semana.
           </p>
         </div>
 
         <!-- Offer 2 -->
-        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950 transition duration-300 hover:shadow-lg">
-          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-650 dark:bg-indigo-950 dark:text-indigo-400 mb-4">
-            <i class="fa-solid fa-truck-fast text-xl"></i>
+        <div class="overflow-hidden rounded-md border border-gray-200 bg-[#F9FAFB] p-6 shadow-sm dark:border-slate-800 dark:bg-[#0B0F19] transition duration-300 hover:border-[#8B5CF6]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-sm bg-[#8B5CF6]/10 text-[#8B5CF6] mb-4">
+            <i class="fa-solid fa-truck-fast text-lg"></i>
           </div>
-          <h3 class="heading-4">Envío Gratis</h3>
-          <p class="body-small mt-2">
+          <h3 class="text-lg font-medium text-[#111827] dark:text-white">Envío Gratis</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">
             Envío exprés gratuito para cualquier pedido de artículos electrónicos superiores a $50.
           </p>
         </div>
 
         <!-- Offer 3 -->
-        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950 transition duration-300 hover:shadow-lg">
-          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-650 dark:bg-indigo-950 dark:text-indigo-400 mb-4">
-            <i class="fa-solid fa-gift text-xl"></i>
+        <div class="overflow-hidden rounded-md border border-gray-200 bg-[#F9FAFB] p-6 shadow-sm dark:border-slate-800 dark:bg-[#0B0F19] transition duration-300 hover:border-[#16A34A]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-sm bg-[#16A34A]/10 text-[#16A34A] mb-4">
+            <i class="fa-solid fa-gift text-lg"></i>
           </div>
-          <h3 class="heading-4">Promoción Especial</h3>
-          <p class="body-small mt-2">
+          <h3 class="text-lg font-medium text-[#111827] dark:text-white">Promoción Especial</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">
             Compra cualquier artículo de ropa y obtén el segundo a mitad de precio con el código ROPA50.
           </p>
         </div>
@@ -113,89 +117,87 @@
   </section>
 
   <!-- Testimonials Section -->
-  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <h2 class="heading-2">Lo Que Dicen Nuestros Clientes</h2>
-      <p class="body-base">Nuestra prioridad número uno es tu satisfacción y seguridad al comprar.</p>
+  <section class="mx-auto max-w-7xl px-6 py-20 sm:px-8">
+    <div class="text-center mb-12">
+      <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-[#8B5CF6] uppercase tracking-widest block mb-2">OPINIONES</span>
+      <h2 class="text-3xl font-light text-[#111827] dark:text-white tracking-tight">Lo Que Dicen Nuestros Clientes</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm font-light mt-2">Nuestra prioridad número uno es tu satisfacción y seguridad al comprar.</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
       <!-- Testimonial 1 -->
-      <div class="testimonial-card">
-        <div class="testimonial-card__avatar flex items-center justify-center bg-indigo-100 text-indigo-650 font-bold dark:bg-indigo-950 dark:text-indigo-400 text-lg">
+      <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 p-6 rounded-md shadow-sm transition duration-300">
+        <!-- Square Avatar wrapper -->
+        <div class="w-12 h-12 flex items-center justify-center rounded-sm bg-[#3B82F6]/10 text-[#3B82F6] font-bold text-base mb-4 font-['Anonymous_Pro',monospace]">
           JD
         </div>
-        <p class="testimonial-card__quote">
+        <p class="text-gray-600 dark:text-gray-300 text-sm italic font-light leading-relaxed">
           "El proceso de compra en SimpleTicket fue sumamente fácil y el envío llegó al día siguiente. Volveré a comprar definitivamente."
         </p>
-        <h4 class="testimonial-card__author">John Doe</h4>
-        <p class="testimonial-card__role">Cliente Verificado</p>
-        <div class="testimonial-card__rating">
-          <div class="stars">
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-          </div>
+        <h4 class="text-sm font-semibold text-[#111827] dark:text-white mt-4">John Doe</h4>
+        <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-400 uppercase tracking-wider mt-0.5">Cliente Verificado</p>
+        <div class="flex gap-1 text-[#D97706] mt-3">
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
         </div>
       </div>
 
       <!-- Testimonial 2 -->
-      <div class="testimonial-card">
-        <div class="testimonial-card__avatar flex items-center justify-center bg-indigo-100 text-indigo-650 font-bold dark:bg-indigo-950 dark:text-indigo-400 text-lg">
+      <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 p-6 rounded-md shadow-sm transition duration-300">
+        <div class="w-12 h-12 flex items-center justify-center rounded-sm bg-[#8B5CF6]/10 text-[#8B5CF6] font-bold text-base mb-4 font-['Anonymous_Pro',monospace]">
           MS
         </div>
-        <p class="testimonial-card__quote">
+        <p class="text-gray-600 dark:text-gray-300 text-sm italic font-light leading-relaxed">
           "Excelente atención al cliente. Tuve una duda con la talla de una casaca y me respondieron de inmediato resolviendo mi problema."
         </p>
-        <h4 class="testimonial-card__author">Maria Silva</h4>
-        <p class="testimonial-card__role">Cliente Verificado</p>
-        <div class="testimonial-card__rating">
-          <div class="stars">
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star-half star"></i>
-          </div>
+        <h4 class="text-sm font-semibold text-[#111827] dark:text-white mt-4">Maria Silva</h4>
+        <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-400 uppercase tracking-wider mt-0.5">Cliente Verificado</p>
+        <div class="flex gap-1 text-[#D97706] mt-3">
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star-half text-xs"></i>
         </div>
       </div>
 
       <!-- Testimonial 3 -->
-      <div class="testimonial-card">
-        <div class="testimonial-card__avatar flex items-center justify-center bg-indigo-100 text-indigo-650 font-bold dark:bg-indigo-950 dark:text-indigo-400 text-lg">
+      <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 p-6 rounded-md shadow-sm transition duration-300">
+        <div class="w-12 h-12 flex items-center justify-center rounded-sm bg-[#16A34A]/10 text-[#16A34A] font-bold text-base mb-4 font-['Anonymous_Pro',monospace]">
           CR
         </div>
-        <p class="testimonial-card__quote">
+        <p class="text-gray-600 dark:text-gray-300 text-sm italic font-light leading-relaxed">
           "Los productos electrónicos tienen un precio excelente y vienen con garantía completa. Totalmente recomendados."
         </p>
-        <h4 class="testimonial-card__author">Carlos Rodríguez</h4>
-        <p class="testimonial-card__role">Cliente Verificado</p>
-        <div class="testimonial-card__rating">
-          <div class="stars">
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-            <i class="fa-solid fa-star star"></i>
-          </div>
+        <h4 class="text-sm font-semibold text-[#111827] dark:text-white mt-4">Carlos Rodríguez</h4>
+        <p class="font-['Anonymous_Pro',monospace] text-xs text-gray-400 uppercase tracking-wider mt-0.5">Cliente Verificado</p>
+        <div class="flex gap-1 text-[#D97706] mt-3">
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
+          <i class="fa-solid fa-star text-xs"></i>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Newsletter Section -->
-  <section class="bg-indigo-900 text-white py-16 px-6 sm:px-12">
+  <section class="bg-white dark:bg-[#111827] border-t border-gray-200 dark:border-slate-800 py-20 px-6 sm:px-12">
     <div class="mx-auto max-w-3xl text-center space-y-4">
-      <h2 class="heading-2 text-white">Suscríbete a nuestro boletín</h2>
-      <p class="body-base text-indigo-150 max-w-md mx-auto">
+      <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-[#3B82F6] uppercase tracking-widest block">BOLETÍN</span>
+      <h2 class="text-3xl font-light text-[#111827] dark:text-white tracking-tight font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">Suscríbete a nuestro boletín</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm font-light max-w-md mx-auto">
         Entérate de las últimas promociones, lanzamientos de productos y cupones de descuento exclusivos.
       </p>
-      <div class="pt-4 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-        <input type="email" placeholder="Introduce tu correo electrónico" class="flex-1 px-4 py-2.5 rounded-xl border-0 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
-        <button class="btn-primary">
-          <i class="fa-solid fa-paper-plane"></i>
+      <div class="pt-4 flex flex-col sm:flex-row gap-3 max-w-md mx-auto font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
+        <input type="email" placeholder="correo@ejemplo.com" 
+               class="flex-1 px-4 py-2.5 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-sm transition-all duration-200 placeholder:text-gray-400/70" />
+        <button class="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium py-2.5 px-6 rounded-sm transition-all duration-200 text-sm tracking-wide flex items-center justify-center gap-2">
+          <i class="fa-solid fa-paper-plane text-xs"></i>
           <span>Suscribirse</span>
         </button>
       </div>

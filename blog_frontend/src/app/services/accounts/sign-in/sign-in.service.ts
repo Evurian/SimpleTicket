@@ -16,4 +16,8 @@ export class SignInService {
     return this.http.post(`${this.apiUrl}/signIn/`, credentials);
   }
 
+  googleSignIn(token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/google/`, { token });
+  }
+
 }

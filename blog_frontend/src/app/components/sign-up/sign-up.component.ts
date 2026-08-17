@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { SignUpService } from '../../services/accounts/sign-up/sign-up.service';
+import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
+
+declare var google: any;
 
 @Component({
   selector: 'app-sign-up',
@@ -13,12 +16,13 @@ import { SignUpService } from '../../services/accounts/sign-up/sign-up.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterLink
   ],
   templateUrl: './sign-up.component.html',
 })
 
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
 
   // Variables
   signUpForm: FormGroup;
@@ -31,7 +35,10 @@ export class SignUpComponent {
     private titleService: Title,
     private fb: FormBuilder,
     private router: Router,
-    private signUpService: SignUpService
+    private signUpService: SignUpService,
+    private signInService: SignInService,
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) 
   {
     this.signUpForm = this.fb.group
@@ -46,6 +53,46 @@ export class SignUpComponent {
   //Init
   ngOnInit(): void {
     this.titleService.setTitle("Sign Up");
+    if (isPlatformBrowser(this.platformId)) {
+      this.initGoogleSignIn();
+    }
+  }
+
+  // Initialize Google Sign-In
+  initGoogleSignIn(): void {
+    if (typeof google !== 'undefined') {
+      google.accounts.id.initialize({
+        client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+        callback: this.handleGoogleSignIn.bind(this)
+      });
+      google.accounts.id.renderButton(
+        document.getElementById('google-btn'),
+        { theme: 'outline', size: 'large', width: '100%', text: 'signup_with', shape: 'rectangular' }
+      );
+    } else {
+      setTimeout(() => this.initGoogleSignIn(), 500);
+    }
+  }
+
+  // Handle Google OAuth callback
+  handleGoogleSignIn(response: any): void {
+    const idToken = response.credential;
+    this.ngZone.run(() => {
+      this.signInService.googleSignIn(idToken).subscribe({
+        next: (res) => {
+          this.successMessage = '¡Registro e inicio de sesión exitoso con Google!';
+          this.errorMessage = null;
+          localStorage.setItem('token', res.token);
+          setTimeout(() => {
+            this.router.navigate(['/profile']);
+          }, 1500);
+        },
+        error: (err) => {
+          this.successMessage = null;
+          this.errorMessage = err.error?.error || 'Error al autenticar con Google.';
+        }
+      });
+    });
   }
 
   // Method | Sign Up
@@ -63,8 +110,8 @@ export class SignUpComponent {
 
     const { username, email, password, confirmPassword } = this.signUpForm.value;
 
-    this.signUpService.signUp({ username, email, password, confirm_password: confirmPassword }).subscribe(
-      response => {
+    this.signUpService.signUp({ username, email, password, confirm_password: confirmPassword }).subscribe({
+      next: (response) => {
         this.successMessage = 'User registered successfully';
         this.errorMessage = null;
         this.signUpForm.reset();
@@ -72,11 +119,11 @@ export class SignUpComponent {
           this.router.navigate(['/sign-in']);
         }, 2000);
       },
-      error => {
-        this.errorMessage = 'There was an error ! ' + error.error.message;
+      error: (error) => {
+        this.errorMessage = 'There was an error ! ' + (error.error?.message || 'Error creating account');
         this.successMessage = null;
       }
-    );
+    });
   }
 
 }

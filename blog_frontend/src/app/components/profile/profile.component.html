@@ -1,72 +1,72 @@
 <app-header></app-header>
 
-<div class="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100 py-8">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-[#F9FAFB] text-[#111827] dark:bg-[#0B0F19] dark:text-white transition-colors duration-300 font-['Plus_Jakarta_Sans','Google_Sans',sans-serif] py-12">
+  <div class="mx-auto max-w-7xl px-6 sm:px-8">
     
     <!-- User Profile Header Card -->
-    <div class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm mb-8">
+    <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-6 shadow-sm mb-8">
       <div class="flex flex-col md:flex-row items-center gap-6" *ngIf="profile">
         
-        <!-- Avatar -->
-        <div class="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-3xl font-extrabold text-indigo-650 ring-4 ring-indigo-100 dark:bg-indigo-950 dark:text-indigo-400 dark:ring-indigo-900/30">
+        <!-- Square Avatar -->
+        <div class="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-sm bg-[#3B82F6]/10 text-2xl font-bold text-[#3B82F6] border border-[#3B82F6]/20 font-['Anonymous_Pro',monospace]">
           {{ profile.username.substring(0,2).toUpperCase() }}
         </div>
 
         <!-- Info -->
-        <div class="flex-1 text-center md:text-left space-y-2">
+        <div class="flex-1 text-center md:text-left space-y-1">
           <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-            <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-50">{{ profile.username }}</h1>
-            <span class="inline-flex items-center self-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300">
+            <h1 class="text-xl font-semibold text-[#111827] dark:text-white">{{ profile.username }}</h1>
+            <span class="inline-flex items-center self-center px-2.5 py-0.5 rounded-sm text-xs font-bold bg-[#3B82F6]/10 text-[#3B82F6] border border-[#3B82F6]/20 uppercase tracking-wider font-['Anonymous_Pro',monospace]">
               {{ role }}
             </span>
           </div>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Miembro desde el {{ profile.date_joined | date:'longDate' }}</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 font-light">Miembro desde el {{ profile.date_joined | date:'longDate' }}</p>
         </div>
 
-        <!-- Edit Profile Panel / Button -->
+        <!-- Edit Profile Button -->
         <div class="w-full md:w-auto">
-          <button *ngIf="!editMode" (click)="startEdit()" class="w-full md:w-auto px-5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-850 transition">
+          <button *ngIf="!editMode" (click)="startEdit()" class="w-full md:w-auto px-4 py-2 border border-gray-300 dark:border-slate-700 rounded-sm text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition duration-200">
             Editar Perfil
           </button>
         </div>
       </div>
 
       <!-- Edit Form (when editMode is true) -->
-      <div *ngIf="editMode" class="mt-6 border-t border-slate-100 pt-6 dark:border-slate-800 space-y-4">
-        <h3 class="font-bold text-sm text-slate-500 uppercase tracking-wider dark:text-slate-400">Actualizar Información</h3>
+      <div *ngIf="editMode" class="mt-6 border-t border-gray-150 pt-6 dark:border-slate-800 space-y-4">
+        <h3 class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actualizar Información</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-2 dark:text-slate-400">Nombre</label>
+            <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Nombre</label>
             <input 
               type="text" 
               [(ngModel)]="firstName" 
-              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-950" 
+              class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition-all duration-200" 
             />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-2 dark:text-slate-400">Apellido</label>
+            <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Apellido</label>
             <input 
               type="text" 
               [(ngModel)]="lastName" 
-              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-950" 
+              class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition-all duration-200" 
             />
           </div>
         </div>
 
-        <div *ngIf="updateError" class="p-3 bg-rose-50 text-rose-600 text-xs font-semibold rounded-xl border border-rose-100 dark:bg-rose-950/20 dark:border-rose-900/30">
+        <div *ngIf="updateError" class="p-3 bg-red-50/50 dark:bg-red-950/20 text-[#DC2626] dark:text-red-400 text-xs rounded-sm border border-red-100 dark:border-red-900/30">
           {{ updateError }}
         </div>
 
         <div class="flex justify-end gap-3 mt-4">
-          <button (click)="cancelEdit()" [disabled]="isUpdating" class="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 dark:border-slate-800 disabled:opacity-50">Cancelar</button>
-          <button (click)="saveProfile()" [disabled]="isUpdating" class="px-5 py-2 rounded-xl bg-indigo-600 text-white font-semibold text-sm hover:bg-indigo-500 disabled:opacity-50 flex items-center gap-2">
-            <span *ngIf="isUpdating" class="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          <button (click)="cancelEdit()" [disabled]="isUpdating" class="border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-sm text-xs transition duration-200 disabled:opacity-50">Cancelar</button>
+          <button (click)="saveProfile()" [disabled]="isUpdating" class="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium py-2 px-4 rounded-sm text-xs transition duration-200 disabled:opacity-50 flex items-center gap-2">
+            <span *ngIf="isUpdating" class="h-3 w-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
             <span>Guardar Cambios</span>
           </button>
         </div>
       </div>
 
-      <div *ngIf="updateSuccess" class="mt-4 p-3 bg-emerald-50 text-emerald-600 text-xs font-semibold rounded-xl border border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-900/30">
+      <div *ngIf="updateSuccess" class="mt-4 p-3 bg-green-50/50 dark:bg-green-950/20 text-[#16A34A] dark:text-green-400 text-xs rounded-sm border border-green-150 dark:border-green-900/30">
         ¡Perfil actualizado con éxito!
       </div>
     </div>
@@ -75,42 +75,42 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       
       <!-- Left Panel: Orders List -->
-      <div class="lg:col-span-1 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-          <i class="pi pi-receipt text-indigo-600 dark:text-indigo-400"></i>
+      <div class="lg:col-span-1 bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-6 shadow-sm flex flex-col">
+        <h2 class="text-md font-semibold mb-4 flex items-center gap-2 text-[#111827] dark:text-white">
+          <i class="fa-solid fa-receipt text-[#3B82F6]"></i>
           <span>Historial de Pedidos</span>
         </h2>
 
         <div class="flex-1 overflow-y-auto space-y-3 max-h-[500px] pr-2">
-          <div *ngIf="orders.length === 0" class="py-12 text-center text-slate-400 dark:text-slate-650">
-            <i class="pi pi-shopping-bag text-4xl mb-3"></i>
-            <p class="text-sm">Aún no has realizado ningún pedido.</p>
+          <div *ngIf="orders.length === 0" class="py-12 text-center text-gray-400 dark:text-slate-650">
+            <i class="fa-solid fa-bag-shopping text-3xl mb-3"></i>
+            <p class="text-xs font-light">Aún no has realizado ningún pedido.</p>
           </div>
 
           <div *ngFor="let order of orders" 
                (click)="selectOrder(order)"
-               [ngClass]="selectedOrder?.id === order.id ? 'border-indigo-600 bg-indigo-50/20 dark:border-indigo-500 dark:bg-indigo-950/20' : 'border-slate-100 hover:border-slate-350 dark:border-slate-800 dark:hover:border-slate-700'"
-               class="cursor-pointer p-4 rounded-2xl border transition flex flex-col justify-between gap-3">
+               [ngClass]="selectedOrder?.id === order.id ? 'border-[#3B82F6] bg-[#3B82F6]/5 dark:border-[#3B82F6] dark:bg-[#3B82F6]/5' : 'border-gray-150 hover:border-gray-300 dark:border-slate-800 dark:hover:border-slate-700'"
+               class="cursor-pointer p-4 rounded-sm border transition duration-200 flex flex-col justify-between gap-3">
             
             <div class="flex justify-between items-start">
               <div>
-                <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Pedido #{{ order.id }}</span>
-                <p class="text-xs text-slate-400 mt-0.5">{{ order.created_at | date:'short' }}</p>
+                <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400">Pedido #{{ order.id }}</span>
+                <p class="text-[10px] text-gray-400 mt-0.5">{{ order.created_at | date:'short' }}</p>
               </div>
               
               <!-- Status Badge -->
               <span [ngClass]="{
-                'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400': order.status === 'PENDING',
-                'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400': order.status === 'SHIPPED',
-                'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400': order.status === 'DELIVERED'
-              }" class="px-2.5 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                'bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/35': order.status === 'PENDING',
+                'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/35': order.status === 'SHIPPED',
+                'bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/35': order.status === 'DELIVERED'
+              }" class="px-2 py-0.5 text-[9px] font-bold rounded-sm uppercase tracking-wider border font-['Anonymous_Pro',monospace]">
                 {{ getOrderStatusText(order.status) }}
               </span>
             </div>
 
-            <div class="flex justify-between items-center mt-1 pt-2 border-t border-slate-100/50 dark:border-slate-800/50">
-              <span class="text-xs text-slate-500 dark:text-slate-400">{{ order.items.length }} Artículos</span>
-              <span class="text-sm font-extrabold text-indigo-650 dark:text-indigo-400">{{ order.total_price | currency }}</span>
+            <div class="flex justify-between items-center mt-1 pt-2 border-t border-gray-100 dark:border-slate-800">
+              <span class="text-xs text-gray-500 dark:text-gray-400 font-light">{{ order.items.length }} Artículos</span>
+              <span class="text-sm font-semibold text-[#3B82F6]">{{ order.total_price | currency }}</span>
             </div>
 
           </div>
@@ -120,62 +120,62 @@
       <!-- Right Panel: Selected Order Detail & Tracker -->
       <div class="lg:col-span-2 space-y-6">
         
-        <div *ngIf="selectedOrder" class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div *ngIf="selectedOrder" class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-6 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-gray-150 dark:border-slate-800 pb-4">
             <div>
-              <h2 class="text-xl font-bold">Detalle del Pedido #{{ selectedOrder.id }}</h2>
-              <p class="text-xs text-slate-400 mt-0.5">Realizado el {{ selectedOrder.created_at | date:'medium' }}</p>
+              <h2 class="text-md font-semibold text-[#111827] dark:text-white">Detalle del Pedido #{{ selectedOrder.id }}</h2>
+              <p class="text-xs text-gray-400 mt-0.5 font-light">Realizado el {{ selectedOrder.created_at | date:'medium' }}</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Total:</span>
-              <span class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">{{ selectedOrder.total_price | currency }}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400 font-light">Total:</span>
+              <span class="text-lg font-semibold text-[#3B82F6]">{{ selectedOrder.total_price | currency }}</span>
             </div>
           </div>
 
           <!-- Timeline Tracking -->
-          <div class="bg-slate-50 dark:bg-slate-950/50 rounded-2xl p-5 border border-slate-100 dark:border-slate-850">
-            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-6 dark:text-slate-450">Seguimiento de Envío</h3>
+          <div class="bg-[#F9FAFB] dark:bg-slate-950/30 rounded-sm p-5 border border-gray-200 dark:border-slate-800">
+            <h3 class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">Seguimiento de Envío</h3>
             
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative">
               <!-- Connector line -->
-              <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 sm:left-0 sm:right-0 sm:top-5 sm:bottom-auto sm:w-auto sm:h-0.5 z-0">
+              <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-slate-850 sm:left-0 sm:right-0 sm:top-5 sm:bottom-auto sm:w-auto sm:h-0.5 z-0">
                 <div [ngClass]="{
                   'w-0': getOrderStep(selectedOrder.status) === 1,
                   'sm:w-1/2 h-full sm:h-auto': getOrderStep(selectedOrder.status) === 2,
                   'w-full h-full sm:h-auto': getOrderStep(selectedOrder.status) === 3
-                }" class="bg-indigo-600 dark:bg-indigo-500 transition-all duration-500"></div>
+                }" class="bg-[#3B82F6] h-full sm:h-auto transition-all duration-500"></div>
               </div>
 
               <!-- Step 1 -->
               <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
-                <span class="h-9 w-9 rounded-full flex items-center justify-center bg-indigo-600 text-white font-bold text-sm shadow-md ring-4 ring-indigo-100 dark:ring-indigo-950">
-                  <i class="pi pi-receipt"></i>
+                <span class="h-8 w-8 rounded-sm flex items-center justify-center bg-[#3B82F6] text-white font-bold text-xs shadow-sm">
+                  <i class="fa-solid fa-receipt text-xs"></i>
                 </span>
                 <div class="text-left sm:text-center">
-                  <p class="text-xs font-bold">Recibido</p>
-                  <p class="text-[10px] text-slate-400">Pedido aprobado</p>
+                  <p class="text-xs font-semibold">Recibido</p>
+                  <p class="text-[10px] text-gray-400 font-light">Pedido aprobado</p>
                 </div>
               </div>
 
               <!-- Step 2 -->
               <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
-                <span [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'bg-indigo-600 text-white ring-4 ring-indigo-100 dark:ring-indigo-950' : 'bg-slate-200 text-slate-500'" class="h-9 w-9 rounded-full flex items-center justify-center font-bold text-sm">
-                  <i class="pi pi-truck"></i>
+                <span [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'bg-[#3B82F6] text-white' : 'bg-gray-250 text-gray-400 dark:bg-slate-800 dark:text-slate-500'" class="h-8 w-8 rounded-sm flex items-center justify-center font-bold text-xs">
+                  <i class="fa-solid fa-truck-fast text-xs"></i>
                 </span>
                 <div class="text-left sm:text-center">
-                  <p class="text-xs font-bold" [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400'">En camino</p>
-                  <p class="text-[10px] text-slate-400">Despachado</p>
+                  <p class="text-xs font-semibold" [ngClass]="getOrderStep(selectedOrder.status) >= 2 ? 'text-[#111827] dark:text-white' : 'text-gray-400'">En camino</p>
+                  <p class="text-[10px] text-gray-400 font-light">Despachado</p>
                 </div>
               </div>
 
               <!-- Step 3 -->
               <div class="flex sm:flex-col items-center gap-3 sm:gap-2 z-10">
-                <span [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'bg-emerald-600 text-white ring-4 ring-emerald-100 dark:ring-emerald-950' : 'bg-slate-200 text-slate-500'" class="h-9 w-9 rounded-full flex items-center justify-center font-bold text-sm">
-                  <i class="pi pi-home"></i>
+                <span [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'bg-[#16A34A] text-white' : 'bg-gray-250 text-gray-400 dark:bg-slate-800 dark:text-slate-500'" class="h-8 w-8 rounded-sm flex items-center justify-center font-bold text-xs">
+                  <i class="fa-solid fa-house text-xs"></i>
                 </span>
                 <div class="text-left sm:text-center">
-                  <p class="text-xs font-bold" [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400'">Entregado</p>
-                  <p class="text-[10px] text-slate-400">Completado</p>
+                  <p class="text-xs font-semibold" [ngClass]="getOrderStep(selectedOrder.status) >= 3 ? 'text-[#111827] dark:text-white' : 'text-gray-400'">Entregado</p>
+                  <p class="text-[10px] text-gray-400 font-light">Completado</p>
                 </div>
               </div>
             </div>
@@ -183,24 +183,24 @@
 
           <!-- Items Detail -->
           <div class="space-y-3">
-            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider dark:text-slate-400">Artículos Comprados</h3>
+            <h3 class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Artículos Comprados</h3>
             
-            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            <div class="divide-y divide-gray-150 dark:divide-slate-800">
               <div *ngFor="let item of selectedOrder.items" class="flex items-center gap-4 py-3 first:pt-0 last:pb-0">
-                <img [src]="item.product.image" class="h-12 w-12 object-contain bg-slate-50 dark:bg-slate-950 p-1.5 rounded-lg border border-slate-100 dark:border-slate-850" />
+                <img [src]="item.product.image" class="h-10 w-10 object-contain bg-[#F9FAFB] dark:bg-[#0B0F19] p-1.5 rounded-sm border border-gray-200 dark:border-slate-800" />
                 <div class="flex-1">
-                  <h4 class="font-semibold text-sm line-clamp-1 dark:text-slate-200">{{ item.product.title }}</h4>
-                  <p class="text-xs text-slate-400 mt-0.5">Cantidad: {{ item.quantity }}</p>
+                  <h4 class="text-xs font-semibold text-[#111827] dark:text-white line-clamp-1">{{ item.product.title }}</h4>
+                  <p class="text-[10px] text-gray-400 mt-0.5 font-light">Cantidad: {{ item.quantity }}</p>
                 </div>
-                <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400">{{ (item.price * item.quantity) | currency }}</span>
+                <span class="text-xs font-semibold text-[#3B82F6]">{{ (item.price * item.quantity) | currency }}</span>
               </div>
             </div>
           </div>
 
           <!-- Shipping Address info -->
-          <div class="border-t border-slate-100 dark:border-slate-800 pt-4">
-            <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-2 dark:text-slate-400">Dirección de Entrega</h3>
-            <p class="text-sm text-slate-650 dark:text-slate-350 bg-slate-50 dark:bg-slate-950/20 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+          <div class="border-t border-gray-150 dark:border-slate-800 pt-4">
+            <h3 class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Dirección de Entrega</h3>
+            <p class="text-xs text-gray-600 dark:text-gray-300 font-light bg-[#F9FAFB] dark:bg-slate-950/20 p-3 rounded-sm border border-gray-200 dark:border-slate-800">
               {{ selectedOrder.shipping_address }}
             </p>
           </div>
@@ -208,10 +208,10 @@
         </div>
 
         <!-- Detail Empty State -->
-        <div *ngIf="!selectedOrder" class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-12 text-center text-slate-400 dark:text-slate-650">
-          <i class="pi pi-receipt text-5xl mb-4"></i>
-          <h3 class="text-lg font-bold">Selecciona un pedido</h3>
-          <p class="text-sm mt-1 max-w-sm mx-auto">Selecciona cualquiera de tus pedidos de la lista de la izquierda para ver su detalle de artículos y seguimiento.</p>
+        <div *ngIf="!selectedOrder" class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-12 text-center text-gray-400 dark:text-slate-600">
+          <i class="fa-solid fa-receipt text-4xl mb-4 text-gray-300 dark:text-slate-800"></i>
+          <h3 class="text-sm font-semibold text-[#111827] dark:text-white">Selecciona un pedido</h3>
+          <p class="text-xs mt-1.5 max-w-sm mx-auto font-light">Selecciona cualquiera de tus pedidos de la lista de la izquierda para ver su detalle de artículos y seguimiento.</p>
         </div>
 
       </div>

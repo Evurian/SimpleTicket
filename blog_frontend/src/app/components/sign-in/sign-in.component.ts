@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
+
+declare var google: any;
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +15,8 @@ import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterLink
   ],
   templateUrl: './sign-in.component.html',
 })
@@ -31,7 +34,9 @@ export class SignInComponent implements OnInit {
     private titleService: Title,
     private fb: FormBuilder,
     private router: Router,
-    private signInService: SignInService
+    private signInService: SignInService,
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) 
   {
     this.signInForm = this.fb.group
@@ -44,6 +49,46 @@ export class SignInComponent implements OnInit {
   // Init
   ngOnInit(): void {
     this.titleService.setTitle("Sign In");
+    if (isPlatformBrowser(this.platformId)) {
+      this.initGoogleSignIn();
+    }
+  }
+
+  // Initialize Google Sign-In
+  initGoogleSignIn(): void {
+    if (typeof google !== 'undefined') {
+      google.accounts.id.initialize({
+        client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+        callback: this.handleGoogleSignIn.bind(this)
+      });
+      google.accounts.id.renderButton(
+        document.getElementById('google-btn'),
+        { theme: 'outline', size: 'large', width: '100%', text: 'signin_with', shape: 'rectangular' }
+      );
+    } else {
+      setTimeout(() => this.initGoogleSignIn(), 500);
+    }
+  }
+
+  // Handle Google OAuth callback
+  handleGoogleSignIn(response: any): void {
+    const idToken = response.credential;
+    this.ngZone.run(() => {
+      this.signInService.googleSignIn(idToken).subscribe({
+        next: (res) => {
+          this.successMessage = '¡Inicio de sesión exitoso con Google!';
+          this.errorMessage = null;
+          localStorage.setItem('token', res.token);
+          setTimeout(() => {
+            this.router.navigate(['/profile']);
+          }, 1500);
+        },
+        error: (err) => {
+          this.successMessage = null;
+          this.errorMessage = err.error?.error || 'Error al iniciar sesión con Google.';
+        }
+      });
+    });
   }
 
   // Method | Sign In
@@ -55,8 +100,8 @@ export class SignInComponent implements OnInit {
 
     const { username, password } = this.signInForm.value;
 
-    this.signInService.signIn({ username, password }).subscribe(
-      response => {
+    this.signInService.signIn({ username, password }).subscribe({
+      next: (response) => {
         this.successMessage = 'Sign In successful !';
         this.errorMessage = null;
         localStorage.setItem('token', response.token);
@@ -64,11 +109,11 @@ export class SignInComponent implements OnInit {
           this.router.navigate(['/profile']);
         }, 2000);
       },
-      error => {
+      error: (error) => {
         this.successMessage = null;
         this.errorMessage = 'Invalid credentials. Please try again.';
       }
-    );
+    });
   }
 
 }

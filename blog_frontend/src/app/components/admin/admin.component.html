@@ -1,22 +1,23 @@
 <app-header></app-header>
 
-<main class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100 pt-24 pb-16 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<main class="min-h-screen bg-[#F9FAFB] text-[#111827] dark:bg-[#0B0F19] dark:text-white pt-24 pb-16 transition-colors duration-300 font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8">
     
     <!-- Title & Navigation -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 pb-6 border-b border-slate-200 dark:border-slate-800 gap-4">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 pb-6 border-b border-gray-200 dark:border-slate-800 gap-4">
       <div>
-        <h1 class="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-          Panel de Administración
+        <span class="font-['Anonymous_Pro',monospace] text-xs font-bold text-[#3B82F6] uppercase tracking-widest block mb-1">ADMINISTRACIÓN</span>
+        <h1 class="text-3xl font-light tracking-tight text-[#111827] dark:text-white font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
+          Panel de Control
         </h1>
-        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 font-light">
           Gestiona el inventario, revisa métricas de ventas, controla pedidos y administra permisos de usuarios.
         </p>
       </div>
       
       <!-- Back button -->
-      <a routerLink="/home" class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700 dark:hover:bg-slate-700 transition duration-200 shadow-sm gap-2">
-        <i class="fa fa-arrow-left"></i>
+      <a routerLink="/home" class="inline-flex items-center justify-center px-4 py-2 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-sm hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-200 dark:border-slate-700 dark:hover:bg-slate-700 transition duration-200 shadow-sm gap-2 font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
+        <i class="fa fa-arrow-left text-[10px]"></i>
         <span>Volver a la Tienda</span>
       </a>
     </div>
@@ -24,18 +25,18 @@
     <!-- Alert Banner -->
     <div *ngIf="alertMessage" 
          [ngClass]="{
-           'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-800/50': alertType === 'success',
-           'bg-red-50 text-red-800 border-red-200 dark:bg-red-950/30 dark:text-red-300 dark:border-red-800/50': alertType === 'danger',
-           'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800/50': alertType === 'info'
+           'bg-green-50/50 text-[#16A34A] border-green-150 dark:bg-green-950/20 dark:text-green-400 dark:border-green-900/30': alertType === 'success',
+           'bg-red-50/50 text-[#DC2626] border-red-150 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/30': alertType === 'danger',
+           'bg-blue-50/50 text-[#3B82F6] border-blue-150 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30': alertType === 'info'
          }"
-         class="fixed top-24 right-4 z-50 flex items-center p-4 mb-4 border rounded-2xl shadow-xl backdrop-blur-md animate-fade-in-down max-w-md">
+         class="fixed top-24 right-4 z-50 flex items-center p-4 border rounded-sm shadow-md max-w-md font-light text-xs animate-fade-in">
       <div class="flex items-center gap-3">
         <i class="fa" [ngClass]="{
-          'fa-check-circle text-emerald-500': alertType === 'success',
-          'fa-exclamation-circle text-red-500': alertType === 'danger',
-          'fa-info-circle text-blue-500': alertType === 'info'
+          'fa-check-circle text-[#16A34A]': alertType === 'success',
+          'fa-exclamation-circle text-[#DC2626]': alertType === 'danger',
+          'fa-info-circle text-[#3B82F6]': alertType === 'info'
         }"></i>
-        <div class="text-sm font-medium">{{ alertMessage }}</div>
+        <div class="font-medium">{{ alertMessage }}</div>
       </div>
     </div>
 
@@ -44,32 +45,32 @@
       
       <!-- Sidebar Tabs -->
       <aside class="lg:col-span-1">
-        <nav class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible bg-white dark:bg-slate-800/50 backdrop-blur-md border border-slate-200 dark:border-slate-800/50 rounded-2xl p-2 shadow-sm gap-1 lg:gap-2">
+        <nav class="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-2 shadow-sm gap-1 lg:gap-1.5">
           <button (click)="switchTab('dashboard')"
-                  [ngClass]="{'bg-blue-500 text-white shadow-md shadow-blue-500/20': activeTab === 'dashboard', 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800': activeTab !== 'dashboard'}"
-                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 gap-3 whitespace-nowrap">
-            <i class="fa fa-chart-line text-lg"></i>
+                  [ngClass]="{'bg-[#3B82F6] text-white': activeTab === 'dashboard', 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-slate-800': activeTab !== 'dashboard'}"
+                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-2.5 text-xs font-semibold rounded-sm transition-all duration-200 gap-3 whitespace-nowrap font-['Anonymous_Pro',monospace] uppercase tracking-wider">
+            <i class="fa fa-chart-line text-sm"></i>
             <span>Dashboard</span>
           </button>
           
           <button (click)="switchTab('products')"
-                  [ngClass]="{'bg-blue-500 text-white shadow-md shadow-blue-500/20': activeTab === 'products', 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800': activeTab !== 'products'}"
-                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 gap-3 whitespace-nowrap">
-            <i class="fa fa-box text-lg"></i>
+                  [ngClass]="{'bg-[#3B82F6] text-white': activeTab === 'products', 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-slate-800': activeTab !== 'products'}"
+                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-2.5 text-xs font-semibold rounded-sm transition-all duration-200 gap-3 whitespace-nowrap font-['Anonymous_Pro',monospace] uppercase tracking-wider">
+            <i class="fa fa-box text-sm"></i>
             <span>Productos</span>
           </button>
           
           <button (click)="switchTab('orders')"
-                  [ngClass]="{'bg-blue-500 text-white shadow-md shadow-blue-500/20': activeTab === 'orders', 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800': activeTab !== 'orders'}"
-                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 gap-3 whitespace-nowrap">
-            <i class="fa fa-shopping-bag text-lg"></i>
+                  [ngClass]="{'bg-[#3B82F6] text-white': activeTab === 'orders', 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-slate-800': activeTab !== 'orders'}"
+                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-2.5 text-xs font-semibold rounded-sm transition-all duration-200 gap-3 whitespace-nowrap font-['Anonymous_Pro',monospace] uppercase tracking-wider">
+            <i class="fa fa-shopping-bag text-sm"></i>
             <span>Pedidos</span>
           </button>
           
           <button (click)="switchTab('users')"
-                  [ngClass]="{'bg-blue-500 text-white shadow-md shadow-blue-500/20': activeTab === 'users', 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800': activeTab !== 'users'}"
-                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 gap-3 whitespace-nowrap">
-            <i class="fa fa-users text-lg"></i>
+                  [ngClass]="{'bg-[#3B82F6] text-white': activeTab === 'users', 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-slate-800': activeTab !== 'users'}"
+                  class="flex-1 lg:flex-none flex items-center justify-center lg:justify-start px-4 py-2.5 text-xs font-semibold rounded-sm transition-all duration-200 gap-3 whitespace-nowrap font-['Anonymous_Pro',monospace] uppercase tracking-wider">
+            <i class="fa fa-users text-sm"></i>
             <span>Usuarios</span>
           </button>
         </nav>
@@ -79,70 +80,70 @@
       <section class="lg:col-span-3">
         
         <!-- Loading state -->
-        <div *ngIf="loading" class="flex flex-col items-center justify-center min-h-[400px] bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
-          <div class="relative flex items-center justify-center w-16 h-16 mb-4">
-            <div class="absolute w-12 h-12 border-4 border-blue-500/30 rounded-full"></div>
-            <div class="absolute w-12 h-12 border-4 border-t-blue-500 rounded-full animate-spin"></div>
+        <div *ngIf="loading" class="flex flex-col items-center justify-center min-h-[400px] bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-8 shadow-sm">
+          <div class="relative flex items-center justify-center w-12 h-12 mb-4">
+            <div class="absolute w-10 h-10 border-2 border-[#3B82F6]/20 rounded-full"></div>
+            <div class="absolute w-10 h-10 border-2 border-t-[#3B82F6] rounded-full animate-spin"></div>
           </div>
-          <span class="text-slate-500 dark:text-slate-400 font-medium">Cargando datos...</span>
+          <span class="text-xs text-gray-500 dark:text-gray-400 font-light font-['Anonymous_Pro',monospace] uppercase tracking-wider">Cargando datos...</span>
         </div>
 
         <div *ngIf="!loading">
           
           <!-- TAB: DASHBOARD -->
-          <div *ngIf="activeTab === 'dashboard' && stats" class="space-y-8 animate-fade-in">
+          <div *ngIf="activeTab === 'dashboard' && stats" class="space-y-8">
             
             <!-- Cards stats row -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               
               <!-- Total Revenue Card -->
-              <div class="bg-white dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex items-center justify-between">
+              <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-5 shadow-sm flex items-center justify-between">
                 <div>
-                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Ingresos Totales</span>
-                  <h3 class="text-2xl font-bold mt-1 text-slate-800 dark:text-slate-100">${{ stats.total_revenue | number:'1.2-2' }}</h3>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-['Anonymous_Pro',monospace]">Ingresos Totales</span>
+                  <h3 class="text-lg font-semibold mt-1 text-[#111827] dark:text-white">${{ stats.total_revenue | number:'1.2-2' }}</h3>
                 </div>
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                  <i class="fa fa-dollar-sign text-xl"></i>
+                <div class="w-10 h-10 rounded-sm bg-[#3B82F6]/10 text-[#3B82F6] border border-[#3B82F6]/20 flex items-center justify-center">
+                  <i class="fa fa-dollar-sign text-md"></i>
                 </div>
               </div>
               
               <!-- Total Orders Card -->
-              <div class="bg-white dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex items-center justify-between">
+              <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-5 shadow-sm flex items-center justify-between">
                 <div>
-                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Pedidos Totales</span>
-                  <h3 class="text-2xl font-bold mt-1 text-slate-800 dark:text-slate-100">{{ stats.total_orders }}</h3>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-['Anonymous_Pro',monospace]">Pedidos Totales</span>
+                  <h3 class="text-lg font-semibold mt-1 text-[#111827] dark:text-white">{{ stats.total_orders }}</h3>
                 </div>
-                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                  <i class="fa fa-shopping-cart text-xl"></i>
+                <div class="w-10 h-10 rounded-sm bg-[#8B5CF6]/10 text-[#8B5CF6] border border-[#8B5CF6]/20 flex items-center justify-center">
+                  <i class="fa fa-shopping-cart text-md"></i>
                 </div>
               </div>
               
               <!-- Total Products Card -->
-              <div class="bg-white dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex items-center justify-between">
+              <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-5 shadow-sm flex items-center justify-between">
                 <div>
-                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Productos Activos</span>
-                  <h3 class="text-2xl font-bold mt-1 text-slate-800 dark:text-slate-100">{{ stats.total_products }}</h3>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-['Anonymous_Pro',monospace]">Productos Activos</span>
+                  <h3 class="text-lg font-semibold mt-1 text-[#111827] dark:text-white">{{ stats.total_products }}</h3>
                 </div>
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                  <i class="fa fa-cubes text-xl"></i>
+                <div class="w-10 h-10 rounded-sm bg-[#16A34A]/10 text-[#16A34A] border border-[#16A34A]/20 flex items-center justify-center">
+                  <i class="fa fa-cubes text-md"></i>
                 </div>
               </div>
               
               <!-- Low Stock Card -->
-              <div class="bg-white dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex items-center justify-between"
-                   [ngClass]="{'border-amber-300/40 bg-amber-50/5 dark:bg-amber-950/5': stats.low_stock > 0}">
+              <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-5 shadow-sm flex items-center justify-between"
+                   [ngClass]="{'border-amber-300 dark:border-amber-900/60 bg-amber-50/10 dark:bg-amber-950/10': stats.low_stock > 0}">
                 <div>
-                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Stock Bajo / Agotado</span>
-                  <h3 class="text-2xl font-bold mt-1 text-slate-800 dark:text-slate-100" [ngClass]="{'text-amber-500 dark:text-amber-400': stats.low_stock > 0}">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-['Anonymous_Pro',monospace]">Stock Bajo/Agotado</span>
+                  <h3 class="text-lg font-semibold mt-1 text-[#111827] dark:text-white" [ngClass]="{'text-[#D97706]': stats.low_stock > 0}">
                     {{ stats.low_stock + stats.out_of_stock }}
                   </h3>
                 </div>
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center"
+                <div class="w-10 h-10 rounded-sm flex items-center justify-center border"
                      [ngClass]="{
-                       'bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400': stats.low_stock > 0,
-                       'bg-slate-500/10 dark:bg-slate-500/20 text-slate-400': stats.low_stock === 0
+                       'bg-[#D97706]/10 border-[#D97706]/20 text-[#D97706]': stats.low_stock > 0,
+                       'bg-gray-100 border-gray-200 text-gray-400 dark:bg-slate-800 dark:border-slate-700': stats.low_stock === 0
                      }">
-                  <i class="fa fa-exclamation-triangle text-xl"></i>
+                  <i class="fa fa-exclamation-triangle text-md"></i>
                 </div>
               </div>
             </div>
@@ -150,77 +151,76 @@
             <!-- Graphs and status count Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
               
-              <!-- Sales bar chart (custom CSS rendered) -->
-              <div class="lg:col-span-2 bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-                <h4 class="text-base font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
-                  <i class="fa fa-calendar-alt text-blue-500"></i>
+              <!-- Sales bar chart -->
+              <div class="lg:col-span-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-6 shadow-sm">
+                <h4 class="text-sm font-semibold text-[#111827] dark:text-white mb-6 flex items-center gap-2">
+                  <i class="fa fa-calendar-alt text-[#3B82F6]"></i>
                   Ingresos de los últimos 7 días
                 </h4>
                 
                 <!-- Chart Container -->
-                <div class="flex items-end justify-between h-64 pt-6 gap-2 sm:gap-4 px-2">
+                <div class="flex items-end justify-between h-64 pt-6 gap-2 sm:gap-4 px-2 relative">
                   <div *ngFor="let item of stats.sales_by_day" class="flex flex-col items-center flex-1 h-full justify-end group">
-                    
                     <!-- Tooltip value -->
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 text-xs font-semibold rounded px-2 py-1 mb-2 absolute translate-y-[-180%] z-10 shadow-md">
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-900 text-white dark:bg-slate-100 dark:text-slate-900 text-[10px] font-bold font-['Anonymous_Pro',monospace] rounded-sm px-2 py-0.5 mb-2 absolute translate-y-[-180%] z-10 shadow-md">
                       ${{ item.revenue | number:'1.0-0' }}
                     </span>
                     
                     <!-- Vertical bar -->
-                    <div class="w-full bg-gradient-to-t from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 rounded-t-lg transition-all duration-500 ease-out shadow-sm"
+                    <div class="w-full bg-[#3B82F6] hover:bg-[#2563EB] rounded-t-sm transition-all duration-300 shadow-sm"
                          [style.height.%]="stats.total_revenue > 0 ? (item.revenue / (stats.total_revenue || 1) * 200 + 4) : 4">
                     </div>
                     
                     <!-- Label Day -->
-                    <span class="text-[10px] sm:text-xs font-medium text-slate-400 dark:text-slate-500 mt-2 truncate max-w-full text-center">
-                      {{ item.date | date:'dd MMM' }}
+                    <span class="text-[9px] font-bold text-gray-400 mt-2 truncate max-w-full text-center font-['Anonymous_Pro',monospace]">
+                      {{ item.date | date:'dd MMM' | uppercase }}
                     </span>
                   </div>
                 </div>
               </div>
 
               <!-- Orders breakdown by status -->
-              <div class="lg:col-span-1 bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+              <div class="lg:col-span-1 bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md p-6 shadow-sm flex flex-col justify-between">
                 <div>
-                  <h4 class="text-base font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
-                    <i class="fa fa-tasks text-indigo-500"></i>
+                  <h4 class="text-sm font-semibold text-[#111827] dark:text-white mb-6 flex items-center gap-2">
+                    <i class="fa fa-tasks text-[#8B5CF6]"></i>
                     Distribución de Pedidos
                   </h4>
                   
-                  <div class="space-y-4">
+                  <div class="space-y-4 font-['Plus_Jakarta_Sans','Google_Sans',sans-serif]">
                     
                     <!-- Pending status bar -->
                     <div>
-                      <div class="flex justify-between text-sm font-semibold mb-1">
-                        <span class="text-slate-500 dark:text-slate-400">Pendiente</span>
+                      <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-gray-500 dark:text-gray-400">Pendiente</span>
                         <span class="text-slate-800 dark:text-slate-200">{{ stats.status_counts.PENDING }}</span>
                       </div>
-                      <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                        <div class="bg-amber-500 h-2 rounded-full" 
+                      <div class="w-full bg-gray-100 dark:bg-slate-800 rounded-sm h-1.5">
+                        <div class="bg-[#D97706] h-1.5 rounded-sm" 
                              [style.width.%]="stats.total_orders > 0 ? (stats.status_counts.PENDING / stats.total_orders * 100) : 0"></div>
                       </div>
                     </div>
                     
                     <!-- Shipped status bar -->
                     <div>
-                      <div class="flex justify-between text-sm font-semibold mb-1">
-                        <span class="text-slate-500 dark:text-slate-400">Enviado</span>
+                      <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-gray-500 dark:text-gray-400">Enviado</span>
                         <span class="text-slate-800 dark:text-slate-200">{{ stats.status_counts.SHIPPED }}</span>
                       </div>
-                      <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                        <div class="bg-blue-500 h-2 rounded-full" 
+                      <div class="w-full bg-gray-100 dark:bg-slate-800 rounded-sm h-1.5">
+                        <div class="bg-[#3B82F6] h-1.5 rounded-sm" 
                              [style.width.%]="stats.total_orders > 0 ? (stats.status_counts.SHIPPED / stats.total_orders * 100) : 0"></div>
                       </div>
                     </div>
                     
                     <!-- Delivered status bar -->
                     <div>
-                      <div class="flex justify-between text-sm font-semibold mb-1">
-                        <span class="text-slate-500 dark:text-slate-400">Entregado</span>
+                      <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-gray-500 dark:text-gray-400">Entregado</span>
                         <span class="text-slate-800 dark:text-slate-200">{{ stats.status_counts.DELIVERED }}</span>
                       </div>
-                      <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                        <div class="bg-emerald-500 h-2 rounded-full" 
+                      <div class="w-full bg-gray-100 dark:bg-slate-800 rounded-sm h-1.5">
+                        <div class="bg-[#16A34A] h-1.5 rounded-sm" 
                              [style.width.%]="stats.total_orders > 0 ? (stats.status_counts.DELIVERED / stats.total_orders * 100) : 0"></div>
                       </div>
                     </div>
@@ -228,9 +228,9 @@
                   </div>
                 </div>
                 
-                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+                <div class="mt-6 pt-4 border-t border-gray-100 dark:border-slate-800 text-[10px] text-gray-500 dark:text-gray-400 flex items-center justify-between font-['Anonymous_Pro',monospace] uppercase tracking-wider font-bold">
                   <span>Total Pedidos</span>
-                  <span class="font-bold text-slate-800 dark:text-slate-200">{{ stats.total_orders }} unidades</span>
+                  <span class="text-[#3B82F6]">{{ stats.total_orders }} unidades</span>
                 </div>
               </div>
 
@@ -239,33 +239,33 @@
           </div>
 
           <!-- TAB: PRODUCTS -->
-          <div *ngIf="activeTab === 'products'" class="space-y-6 animate-fade-in">
+          <div *ngIf="activeTab === 'products'" class="space-y-6">
             
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <!-- Search bar -->
-              <div class="relative flex-1">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                  <i class="fa fa-search"></i>
+              <div class="relative flex-1 max-w-md">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                  <i class="fa fa-search text-xs"></i>
                 </span>
                 <input type="text" 
                        [(ngModel)]="productSearch"
                        placeholder="Buscar producto por título, categoría..." 
-                       class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition shadow-sm" />
+                       class="w-full pl-10 pr-4 py-2 bg-white dark:bg-[#111827] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition placeholder:text-gray-400/70" />
               </div>
               
               <!-- Add button -->
-              <button (click)="openAddProduct()" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition duration-200 shadow-md shadow-blue-500/20 gap-2">
-                <i class="fa fa-plus"></i>
+              <button (click)="openAddProduct()" class="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold text-white bg-[#3B82F6] hover:bg-[#2563EB] rounded-sm transition duration-200 gap-2">
+                <i class="fa fa-plus text-[10px]"></i>
                 <span>Nuevo Producto</span>
               </button>
             </div>
 
             <!-- Products List Card/Table -->
-            <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md shadow-sm overflow-hidden">
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-800/80 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <tr class="bg-[#F9FAFB] dark:bg-slate-900 border-b border-gray-250 dark:border-slate-800 font-['Anonymous_Pro',monospace] text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                       <th class="px-6 py-4">Producto</th>
                       <th class="px-6 py-4">Categoría</th>
                       <th class="px-6 py-4">Precio</th>
@@ -273,50 +273,50 @@
                       <th class="px-6 py-4 text-right">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
-                    <tr *ngFor="let p of filteredProducts" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                  <tbody class="divide-y divide-gray-150 dark:divide-slate-800 text-xs">
+                    <tr *ngFor="let p of filteredProducts" class="hover:bg-gray-50/50 dark:hover:bg-slate-800/30 transition-colors">
                       <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
                           <img [src]="p.image || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=80&q=80'" 
-                               class="w-10 h-10 rounded-lg object-cover bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-700" 
+                               class="w-8 h-8 rounded-sm object-contain bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-200 dark:border-slate-800 p-0.5" 
                                alt="Product" />
-                          <div class="font-semibold text-slate-800 dark:text-slate-100 max-w-[200px] truncate" [title]="p.title">
+                          <div class="font-semibold text-[#111827] dark:text-white max-w-[200px] truncate" [title]="p.title">
                             {{ p.title }}
                           </div>
                         </div>
                       </td>
-                      <td class="px-6 py-4 text-slate-500 dark:text-slate-400 capitalize">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                      <td class="px-6 py-4 capitalize text-gray-500 dark:text-gray-400">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-bold bg-[#8B5CF6]/10 text-[#8B5CF6] border border-[#8B5CF6]/20 font-['Anonymous_Pro',monospace] uppercase tracking-wider">
                           {{ p.category }}
                         </span>
                       </td>
-                      <td class="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">
+                      <td class="px-6 py-4 font-semibold text-[#111827] dark:text-white font-['Anonymous_Pro',monospace]">
                         ${{ p.price | number:'1.2-2' }}
                       </td>
                       <td class="px-6 py-4">
-                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold"
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-bold font-['Anonymous_Pro',monospace] uppercase border tracking-wider"
                               [ngClass]="{
-                                'bg-red-50 text-red-700 dark:bg-red-950/20 dark:text-red-400': p.stock === 0,
-                                'bg-amber-50 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400': p.stock > 0 && p.stock <= 5,
-                                'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400': p.stock > 5
+                                'bg-red-50/50 text-[#DC2626] border-red-150 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/35': p.stock === 0,
+                                'bg-amber-50/50 text-[#D97706] border-amber-150 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/35': p.stock > 0 && p.stock <= 5,
+                                'bg-green-50/50 text-[#16A34A] border-green-150 dark:bg-green-950/20 dark:text-green-400 dark:border-green-900/35': p.stock > 5
                               }">
                           {{ p.stock === 0 ? 'Agotado' : p.stock + ' disp.' }}
                         </span>
                       </td>
                       <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                          <button (click)="openEditProduct(p)" class="p-2 text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition" title="Editar">
-                            <i class="fa fa-edit text-base"></i>
+                        <div class="flex items-center justify-end gap-1">
+                          <button (click)="openEditProduct(p)" class="p-2 text-gray-400 hover:text-[#3B82F6] hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm transition" title="Editar">
+                            <i class="fa fa-edit text-xs"></i>
                           </button>
-                          <button (click)="deleteProduct(p.id, p.title)" class="p-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition" title="Eliminar">
-                            <i class="fa fa-trash-alt text-base"></i>
+                          <button (click)="deleteProduct(p.id, p.title)" class="p-2 text-gray-400 hover:text-[#DC2626] hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm transition" title="Eliminar">
+                            <i class="fa fa-trash-alt text-xs"></i>
                           </button>
                         </div>
                       </td>
                     </tr>
                     
                     <tr *ngIf="filteredProducts.length === 0">
-                      <td colspan="5" class="px-6 py-12 text-center text-slate-400 dark:text-slate-500">
+                      <td colspan="5" class="px-6 py-12 text-center text-gray-400 dark:text-slate-650 font-light">
                         No se encontraron productos coincidentes.
                       </td>
                     </tr>
@@ -328,25 +328,25 @@
           </div>
 
           <!-- TAB: ORDERS -->
-          <div *ngIf="activeTab === 'orders'" class="space-y-6 animate-fade-in">
+          <div *ngIf="activeTab === 'orders'" class="space-y-6">
             
             <!-- Search bar -->
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                <i class="fa fa-search"></i>
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <i class="fa fa-search text-xs"></i>
               </span>
               <input type="text" 
                      [(ngModel)]="orderSearch"
                      placeholder="Buscar pedido por ID, comprador o dirección..." 
-                     class="w-full max-w-md pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition shadow-sm" />
+                     class="w-full max-w-md pl-10 pr-4 py-2 bg-white dark:bg-[#111827] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition placeholder:text-gray-400/70" />
             </div>
 
             <!-- Orders Table -->
-            <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md shadow-sm overflow-hidden">
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-800/80 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <tr class="bg-[#F9FAFB] dark:bg-slate-900 border-b border-gray-250 dark:border-slate-800 font-['Anonymous_Pro',monospace] text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                       <th class="px-6 py-4">Pedido ID</th>
                       <th class="px-6 py-4">Comprador</th>
                       <th class="px-6 py-4">Fecha</th>
@@ -355,32 +355,32 @@
                       <th class="px-6 py-4">Estado</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
-                    <tr *ngFor="let o of filteredOrders" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                      <td class="px-6 py-4 font-bold text-slate-800 dark:text-slate-200">
+                  <tbody class="divide-y divide-gray-150 dark:divide-slate-800 text-xs">
+                    <tr *ngFor="let o of filteredOrders" class="hover:bg-gray-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                      <td class="px-6 py-4 font-bold text-[#111827] dark:text-white font-['Anonymous_Pro',monospace]">
                         #{{ o.id }}
                       </td>
-                      <td class="px-6 py-4 text-slate-800 dark:text-slate-100 font-semibold">
+                      <td class="px-6 py-4 text-[#111827] dark:text-white font-semibold">
                         {{ o.username }}
                       </td>
-                      <td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                      <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                         {{ o.created_at | date:'dd/MM/yyyy HH:mm' }}
                       </td>
-                      <td class="px-6 py-4 text-slate-500 dark:text-slate-400 max-w-[200px] truncate" [title]="o.shipping_address">
+                      <td class="px-6 py-4 text-gray-500 dark:text-gray-400 max-w-[200px] truncate" [title]="o.shipping_address">
                         {{ o.shipping_address }}
                       </td>
-                      <td class="px-6 py-4 font-bold text-slate-800 dark:text-slate-200">
+                      <td class="px-6 py-4 font-semibold text-[#111827] dark:text-white">
                         ${{ o.total_price | number:'1.2-2' }}
                       </td>
                       <td class="px-6 py-4">
                         <select [ngModel]="o.status" 
                                 (ngModelChange)="changeOrderStatus(o.id, $event)"
                                 [ngClass]="{
-                                  'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/20 dark:text-amber-400 dark:border-amber-900/50': o.status === 'PENDING',
-                                  'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/50': o.status === 'SHIPPED',
-                                  'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/50': o.status === 'DELIVERED'
+                                  'bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50': o.status === 'PENDING',
+                                  'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/50': o.status === 'SHIPPED',
+                                  'bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50': o.status === 'DELIVERED'
                                 }"
-                                class="text-xs font-semibold rounded-full border px-2.5 py-1 focus:outline-none cursor-pointer">
+                                class="text-[10px] font-bold rounded-sm border px-2 py-0.5 focus:outline-none cursor-pointer uppercase tracking-wider font-['Anonymous_Pro',monospace]">
                           <option value="PENDING">Pendiente</option>
                           <option value="SHIPPED">Enviado</option>
                           <option value="DELIVERED">Entregado</option>
@@ -389,7 +389,7 @@
                     </tr>
                     
                     <tr *ngIf="filteredOrders.length === 0">
-                      <td colspan="6" class="px-6 py-12 text-center text-slate-400 dark:text-slate-500">
+                      <td colspan="6" class="px-6 py-12 text-center text-gray-400 dark:text-slate-650 font-light">
                         No se encontraron pedidos.
                       </td>
                     </tr>
@@ -401,25 +401,25 @@
           </div>
 
           <!-- TAB: USERS -->
-          <div *ngIf="activeTab === 'users'" class="space-y-6 animate-fade-in">
+          <div *ngIf="activeTab === 'users'" class="space-y-6">
             
             <!-- Search bar -->
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                <i class="fa fa-search"></i>
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                <i class="fa-search fa text-xs"></i>
               </span>
               <input type="text" 
                      [(ngModel)]="userSearch"
                      placeholder="Buscar usuario por nombre de usuario o email..." 
-                     class="w-full max-w-md pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition shadow-sm" />
+                     class="w-full max-w-md pl-10 pr-4 py-2 bg-white dark:bg-[#111827] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition placeholder:text-gray-400/70" />
             </div>
 
             <!-- Users Table -->
-            <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md shadow-sm overflow-hidden">
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
-                    <tr class="bg-slate-50 dark:bg-slate-800/80 text-xs font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <tr class="bg-[#F9FAFB] dark:bg-slate-900 border-b border-gray-250 dark:border-slate-800 font-['Anonymous_Pro',monospace] text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                       <th class="px-6 py-4">Usuario</th>
                       <th class="px-6 py-4">Email</th>
                       <th class="px-6 py-4">Fecha de Registro</th>
@@ -428,39 +428,39 @@
                       <th class="px-6 py-4 text-right">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
-                    <tr *ngFor="let u of filteredUsers" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                      <td class="px-6 py-4 font-semibold text-slate-800 dark:text-slate-100">
+                  <tbody class="divide-y divide-gray-150 dark:divide-slate-800 text-xs">
+                    <tr *ngFor="let u of filteredUsers" class="hover:bg-gray-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                      <td class="px-6 py-4 font-semibold text-[#111827] dark:text-white">
                         {{ u.username }}
                       </td>
-                      <td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                      <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                         {{ u.email || 'N/A' }}
                       </td>
-                      <td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                      <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                         {{ u.date_joined | date:'dd/MM/yyyy' }}
                       </td>
                       <td class="px-6 py-4">
                         <i class="fa" 
-                           [ngClass]="u.is_staff ? 'fa-check-circle text-emerald-500 text-lg' : 'fa-times-circle text-slate-300 dark:text-slate-700 text-lg'"></i>
+                           [ngClass]="u.is_staff ? 'fa-check-circle text-[#16A34A] text-base' : 'fa-circle-xmark text-gray-300 dark:text-slate-700 text-base'"></i>
                       </td>
                       <td class="px-6 py-4">
                         <i class="fa" 
-                           [ngClass]="u.is_superuser ? 'fa-check-circle text-emerald-500 text-lg' : 'fa-times-circle text-slate-300 dark:text-slate-700 text-lg'"></i>
+                           [ngClass]="u.is_superuser ? 'fa-check-circle text-[#16A34A] text-base' : 'fa-circle-xmark text-gray-300 dark:text-slate-700 text-base'"></i>
                       </td>
                       <td class="px-6 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                          <button (click)="openEditUser(u)" class="p-2 text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition" title="Editar Roles">
-                            <i class="fa fa-user-shield text-base"></i>
+                        <div class="flex items-center justify-end gap-1">
+                          <button (click)="openEditUser(u)" class="p-2 text-gray-400 hover:text-[#3B82F6] hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm transition" title="Editar Roles">
+                            <i class="fa fa-user-shield text-xs"></i>
                           </button>
-                          <button (click)="deleteUser(u.id, u.username)" class="p-2 text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition" title="Eliminar">
-                            <i class="fa fa-trash-alt text-base"></i>
+                          <button (click)="deleteUser(u.id, u.username)" class="p-2 text-gray-400 hover:text-[#DC2626] hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm transition" title="Eliminar">
+                            <i class="fa fa-trash-alt text-xs"></i>
                           </button>
                         </div>
                       </td>
                     </tr>
                     
                     <tr *ngIf="filteredUsers.length === 0">
-                      <td colspan="6" class="px-6 py-12 text-center text-slate-400 dark:text-slate-500">
+                      <td colspan="6" class="px-6 py-12 text-center text-gray-400 dark:text-slate-650 font-light">
                         No se encontraron usuarios coincidentes.
                       </td>
                     </tr>
@@ -479,14 +479,14 @@
 
     <!-- MODAL: ADD / EDIT PRODUCT -->
     <div *ngIf="showProductModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden animate-scale-up">
+      <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md w-full max-w-2xl shadow-xl overflow-hidden">
         
         <!-- Header -->
-        <div class="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+        <div class="px-6 py-4 border-b border-gray-150 dark:border-slate-800 flex items-center justify-between">
+          <h3 class="text-md font-semibold text-[#111827] dark:text-white">
             {{ isEditingProduct ? 'Editar Producto' : 'Añadir Nuevo Producto' }}
           </h3>
-          <button (click)="closeProductModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <button (click)="closeProductModal()" class="text-gray-400 hover:text-[#3B82F6] p-1.5 rounded-sm hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors duration-200">
             <i class="fa fa-times text-lg"></i>
           </button>
         </div>
@@ -496,14 +496,14 @@
           
           <!-- Image Upload / Link -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl p-4 bg-slate-50 dark:bg-slate-950/20 relative group overflow-hidden min-h-[160px]">
-              <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" class="absolute inset-0 w-full h-full object-cover rounded-2xl" alt="Preview" />
-              <div *ngIf="!imagePreviewUrl" class="text-center text-slate-400 dark:text-slate-600 flex flex-col items-center">
-                <i class="fa fa-image text-3xl mb-2"></i>
-                <span class="text-xs font-semibold">Sin Vista Previa</span>
+            <div class="md:col-span-1 flex flex-col items-center justify-center border border-dashed border-gray-300 dark:border-slate-700 rounded-sm p-4 bg-[#F9FAFB] dark:bg-[#0B0F19] relative group overflow-hidden min-h-[160px]">
+              <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" class="absolute inset-0 w-full h-full object-contain rounded-sm" alt="Preview" />
+              <div *ngIf="!imagePreviewUrl" class="text-center text-gray-400 dark:text-gray-600 flex flex-col items-center">
+                <i class="fa fa-image text-2xl mb-2"></i>
+                <span class="text-[10px] font-bold font-['Anonymous_Pro',monospace] uppercase tracking-wider">Sin Foto</span>
               </div>
               <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-200">
-                <label class="cursor-pointer bg-white text-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:scale-105 transition">
+                <label class="cursor-pointer bg-white text-[#111827] px-3 py-1.5 rounded-sm text-xs font-medium shadow-sm hover:bg-gray-50 transition duration-200">
                   Subir Foto
                   <input type="file" (change)="onFileSelected($event)" accept="image/*" class="hidden" />
                 </label>
@@ -512,15 +512,15 @@
 
             <div class="md:col-span-2 space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">O pegar enlace de Imagen URL</label>
+                <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">O pegar enlace de Imagen URL</label>
                 <input type="text" [(ngModel)]="productForm.image" placeholder="https://ejemplo.com/imagen.jpg" 
-                       class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition" />
+                       class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition" />
               </div>
               
               <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Título del Producto *</label>
+                <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Título del Producto *</label>
                 <input type="text" [(ngModel)]="productForm.title" placeholder="Ej. Smart TV 55 Pulgadas" 
-                       class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition" />
+                       class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition" />
               </div>
             </div>
           </div>
@@ -528,35 +528,35 @@
           <!-- Price & Stock -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Precio ($) *</label>
+              <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Precio ($) *</label>
               <input type="number" [(ngModel)]="productForm.price" min="0" step="0.01" 
-                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition" />
+                     class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Inventario (Stock) *</label>
+              <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Inventario (Stock) *</label>
               <input type="number" [(ngModel)]="productForm.stock" min="0" 
-                     class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition" />
+                     class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition" />
             </div>
           </div>
 
           <!-- Category Selection -->
           <div>
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Categoría *</label>
+            <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Categoría *</label>
             <div class="flex gap-2">
               <select *ngIf="!showNewCategoryInput" [(ngModel)]="productForm.category" 
-                      class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition capitalize">
+                      class="flex-1 px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition capitalize cursor-pointer">
                 <option value="">Selecciona una categoría...</option>
                 <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
               </select>
               
               <input *ngIf="showNewCategoryInput" type="text" [(ngModel)]="newCategoryName" placeholder="Escribe nueva categoría..." 
-                     class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition" />
+                     class="flex-1 px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition" />
 
-              <button type="button" (click)="toggleNewCategoryInput()" class="px-4 py-2.5 bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 font-semibold rounded-xl text-sm transition">
+              <button type="button" (click)="toggleNewCategoryInput()" class="px-4 py-2 bg-gray-150 text-gray-700 hover:bg-gray-200 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700 font-medium rounded-sm text-xs transition duration-250">
                 {{ showNewCategoryInput ? 'Cancelar' : '+ Nueva' }}
               </button>
               
-              <button *ngIf="showNewCategoryInput" type="button" (click)="addNewCategory()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition">
+              <button *ngIf="showNewCategoryInput" type="button" (click)="addNewCategory()" class="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium rounded-sm text-xs transition duration-200">
                 Añadir
               </button>
             </div>
@@ -564,19 +564,19 @@
 
           <!-- Description -->
           <div>
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Descripción *</label>
+            <label class="block font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Descripción *</label>
             <textarea [(ngModel)]="productForm.description" rows="4" placeholder="Escribe detalles del producto aquí..." 
-                      class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm transition"></textarea>
+                      class="w-full px-3 py-2 bg-[#F9FAFB] dark:bg-[#0B0F19] border border-gray-300 dark:border-slate-700 rounded-sm focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]/50 text-[#111827] dark:text-white text-xs transition"></textarea>
           </div>
 
         </div>
         
         <!-- Footer actions -->
-        <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
-          <button (click)="closeProductModal()" class="px-4 py-2.5 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 rounded-xl text-sm font-semibold transition">
+        <div class="px-6 py-4 bg-[#F9FAFB] dark:bg-slate-950/20 border-t border-gray-150 dark:border-slate-800 flex items-center justify-end gap-3">
+          <button (click)="closeProductModal()" class="px-4 py-2 text-gray-650 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm text-xs font-medium transition duration-200">
             Cancelar
           </button>
-          <button (click)="saveProduct()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold shadow-md shadow-blue-500/20 transition">
+          <button (click)="saveProduct()" class="px-5 py-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-sm text-xs font-semibold transition duration-200">
             Guardar Cambios
           </button>
         </div>
@@ -586,51 +586,51 @@
 
     <!-- MODAL: EDIT USER ROLES -->
     <div *ngIf="showUserModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden animate-scale-up">
+      <div class="bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-md w-full max-w-md shadow-xl overflow-hidden">
         
         <!-- Header -->
-        <div class="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+        <div class="px-6 py-4 border-b border-gray-150 dark:border-slate-800 flex items-center justify-between">
+          <h3 class="text-md font-semibold text-[#111827] dark:text-white">
             Administrar Roles: {{ selectedUser?.username }}
           </h3>
-          <button (click)="closeUserModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <button (click)="closeUserModal()" class="text-gray-400 hover:text-[#3B82F6] p-1.5 rounded-sm hover:bg-gray-100 dark:hover:bg-slate-800 transition">
             <i class="fa fa-times text-lg"></i>
           </button>
         </div>
         
         <!-- Body -->
         <div class="p-6 space-y-4">
-          <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2 font-light">
             Modifica los permisos de acceso del usuario a la plataforma y las APIs administrativas.
           </p>
           
           <!-- Staff Permission toggle -->
-          <label class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/10 transition">
+          <label class="flex items-center justify-between p-4 bg-[#F9FAFB] dark:bg-slate-950/20 border border-gray-200 dark:border-slate-800 rounded-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/20 transition duration-200">
             <div>
-              <div class="text-sm font-bold text-slate-800 dark:text-slate-200">Personal Staff (is_staff)</div>
-              <div class="text-xs text-slate-400">Permite acceder a este panel de administración y CRUDs.</div>
+              <div class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Personal Staff (is_staff)</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Permite acceder a este panel de administración y CRUDs.</div>
             </div>
             <input type="checkbox" [(ngModel)]="userForm.is_staff" 
-                   class="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:bg-slate-800 dark:border-slate-700 cursor-pointer" />
+                   class="w-4 h-4 rounded-sm border-gray-300 text-[#3B82F6] focus:ring-[#3B82F6] dark:bg-slate-800 dark:border-slate-700 cursor-pointer" />
           </label>
           
           <!-- Superuser Permission toggle -->
-          <label class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-950/20 border border-slate-200 dark:border-slate-800 rounded-2xl cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-800/10 transition">
+          <label class="flex items-center justify-between p-4 bg-[#F9FAFB] dark:bg-slate-950/20 border border-gray-200 dark:border-slate-800 rounded-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/20 transition duration-200">
             <div>
-              <div class="text-sm font-bold text-slate-800 dark:text-slate-200">Superusuario (is_superuser)</div>
-              <div class="text-xs text-slate-400">Otorga todos los permisos del sistema sin restricciones.</div>
+              <div class="font-['Anonymous_Pro',monospace] text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider">Superusuario (is_superuser)</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Otorga todos los permisos del sistema sin restricciones.</div>
             </div>
             <input type="checkbox" [(ngModel)]="userForm.is_superuser" 
-                   class="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:bg-slate-800 dark:border-slate-700 cursor-pointer" />
+                   class="w-4 h-4 rounded-sm border-gray-300 text-[#3B82F6] focus:ring-[#3B82F6] dark:bg-slate-800 dark:border-slate-700 cursor-pointer" />
           </label>
         </div>
         
         <!-- Footer -->
-        <div class="px-6 py-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
-          <button (click)="closeUserModal()" class="px-4 py-2.5 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 rounded-xl text-sm font-semibold transition">
+        <div class="px-6 py-4 bg-[#F9FAFB] dark:bg-slate-950/20 border-t border-gray-150 dark:border-slate-800 flex items-center justify-end gap-3">
+          <button (click)="closeUserModal()" class="px-4 py-2 text-gray-650 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-sm text-xs font-medium transition">
             Cancelar
           </button>
-          <button (click)="saveUserPermissions()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold shadow-md shadow-blue-500/20 transition">
+          <button (click)="saveUserPermissions()" class="px-5 py-2 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-sm text-xs font-semibold transition">
             Guardar Cambios
           </button>
         </div>

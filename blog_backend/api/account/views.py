@@ -42,6 +42,69 @@ def signIn(request):
         return Response({'token': token.key}, status = status.HTTP_200_OK)
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def google_signIn(request):
+    token = request.data.get('token')
+    if not token:
+        return Response({'error': 'Token is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+    try:
+        # Verify the token via Google's tokeninfo API
+        google_response = requests.get(
+            f"https://oauth2.googleapis.com/tokeninfo?id_token={token}",
+            timeout=10
+        )
+        if google_response.status_code != 200:
+            return Response({'error': 'Invalid Google token'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        payload = google_response.json()
+        
+        email = payload.get('email')
+        if not email:
+            return Response({'error': 'Email not provided by Google'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        sub = payload.get('sub')
+        given_name = payload.get('given_name', '')
+        family_name = payload.get('family_name', '')
+        
+        # Check if user exists by email
+        user = User.objects.filter(email=email).first()
+        if not user:
+            # Generate unique username
+            base_username = email.split('@')[0]
+            username = base_username
+            counter = 1
+            while User.objects.filter(username=username).exists():
+                username = f"{base_username}_{sub[:5]}_{counter}"
+                counter += 1
+                
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                first_name=given_name,
+                last_name=family_name
+            )
+            
+            # Send welcome email
+            try:
+                subject = 'Bienvenido a nuestra plataforma'
+                message = f'Hola {user.username},\n\nGracias por registrarte en nuestra plataforma usando Google. ¡Esperamos que disfrutes de nuestros servicios!'
+                from_email = settings.EMAIL_HOST_USER
+                recipient_list = [user.email]
+                send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+            except Exception:
+                pass
+                
+        # Generate token
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        
+    except requests.exceptions.RequestException:
+        return Response({'error': 'Failed to communicate with Google authentication servers'}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 # Profile
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
