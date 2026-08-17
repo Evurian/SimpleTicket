@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../../services/accounts/session/session-service.service';
 import { ProfileService } from '../../services/accounts/profile.service';
@@ -9,7 +9,7 @@ import { ThemeService } from '../../services/theme.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {

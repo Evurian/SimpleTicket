@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 import { SignInService } from '../../services/accounts/sign-in/sign-in.service';
 
@@ -30,20 +31,19 @@ export class SignInComponent implements OnInit {
 
   // Constructor
   constructor
-  (
-    private titleService: Title,
-    private fb: FormBuilder,
-    private router: Router,
-    private signInService: SignInService,
-    private ngZone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) 
-  {
+    (
+      private titleService: Title,
+      private fb: FormBuilder,
+      private router: Router,
+      private signInService: SignInService,
+      private ngZone: NgZone,
+      @Inject(PLATFORM_ID) private platformId: Object
+    ) {
     this.signInForm = this.fb.group
-    ({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+      ({
+        username: ['', Validators.required],
+        password: ['', Validators.required]
+      });
   }
 
   // Init
@@ -57,13 +57,18 @@ export class SignInComponent implements OnInit {
   // Initialize Google Sign-In
   initGoogleSignIn(): void {
     if (typeof google !== 'undefined') {
+      const btnElement = document.getElementById('google-btn');
+      if (!btnElement) {
+        setTimeout(() => this.initGoogleSignIn(), 100);
+        return;
+      }
       google.accounts.id.initialize({
-        client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+        client_id: environment.googleClientId,
         callback: this.handleGoogleSignIn.bind(this)
       });
       google.accounts.id.renderButton(
-        document.getElementById('google-btn'),
-        { theme: 'outline', size: 'large', width: '100%', text: 'signin_with', shape: 'rectangular' }
+        btnElement,
+        { theme: 'outline', size: 'large', width: 350, text: 'signin_with', shape: 'rectangular' }
       );
     } else {
       setTimeout(() => this.initGoogleSignIn(), 500);

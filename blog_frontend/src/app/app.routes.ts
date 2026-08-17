@@ -14,7 +14,8 @@ import { ProductDetailComponent } from './components/detail-product/detail-produ
 import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent, canActivate: [UserGuardService] },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'profile', component: ProfileComponent, canActivate: [UserGuardService] },
     { path: 'welcome', component: WelcomeComponent, canActivate: [GuestGuardService] },
     { path: 'sign-in', component: SignInComponent},
