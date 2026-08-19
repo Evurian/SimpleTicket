@@ -56,6 +56,8 @@ Aquí puedes ver la interfaz de usuario moderna y estilizada de SimpleTicket:
 
 ### 🎨 Frontend (Angular & Tailwind CSS / PrimeNG)
 *   **Estructura Reactiva SPA**: Implementado en **Angular** empleando componentes funcionales reactivos y un flujo de comunicación basado en servicios.
+*   **Autenticación Integrada con Google (GSI)**: Botón nativo de Google Sign-In y Sign-Up de un solo clic, integrado en los formularios de Login y Registro de forma fluida y asíncrona.
+*   **Manejo de Entornos**: Variables del proyecto centralizadas en archivos `.env` (backend) y `environments/` (frontend) para facilitar el paso entre desarrollo y producción.
 *   **Diseño Visual Premium**:
     *   **Tipografía de Vanguardia**: Uso de *Outfit* para títulos (display moderno) e *Inter* para lectura (alta legibilidad), importadas directamente de Google Fonts.
     *   **Paleta de Colores Curada**: Variables Sass que definen una escala cromática profesional basada en marcas líderes como Shopify y Mercado Libre.
@@ -63,7 +65,8 @@ Aquí puedes ver la interfaz de usuario moderna y estilizada de SimpleTicket:
     *   **Diseño Neumórfico y Glassmorphism**: Cards de productos con elevación dinámica, desenfoque de fondo en modales y transiciones fluidas de hover.
 *   **Experiencia de Compra Interactiva**:
     *   **Carrito Lateral Persistente**: Panel lateral deslizante (Drawer Panel) gestionado por `CartService` que permite modificar cantidades y eliminar artículos sin recargar la página.
-    *   **Wizard Checkout**: Proceso de compra guiado paso a paso con validaciones dinámicas de formularios en tiempo real.
+    *   **Wizard Checkout de 3 Pasos**: Proceso de compra guiado (1. Revisión, 2. Envío, 3. Pago) con validaciones dinámicas y reactivas de formularios.
+    *   **Pasarela de Pago Simulada**: Simulador de pagos integrado en el Checkout que emula un procesamiento bancario real (Validación -> Fondos -> Aprobación) con formateo y enmascaramiento dinámico de tarjetas de crédito en tiempo real.
     *   **Línea de Tiempo del Pedido (Order Tracker)**: Componente visual interactivo para que los usuarios monitoreen si su pedido está `PENDIENTE`, `ENVIADO` o `ENTREGADO`.
     *   **Skeleton Loaders**: Efecto de carga shimmer que reduce la percepción del tiempo de espera del usuario.
 
@@ -89,6 +92,10 @@ SimpleTicket/
 │   │   ├── app/
 │   │   │   ├── components/    # Home, Header, Footer, List (Catálogo), Detail, Profile
 │   │   │   └── services/      # CartService, ThemeService, ListaService, Accounts
+│   │   │
+│   │   ├── environments/      # Configuraciones de Entorno (desarrollo/producción)
+│   │   │   ├── environment.ts
+│   │   │   └── environment.development.ts
 │   │   │
 │   │   ├── styles/            # Sistema de Estilos SCSS
 │   │   │   ├── variables.scss # Paleta de colores, sombras y espaciados
@@ -178,12 +185,22 @@ SimpleTicket/
     npm install
     ```
 
-3.  **Iniciar el servidor de desarrollo**:
+3.  **Configurar archivos de entorno**:
+    Edita los archivos generados en `src/environments/environment.ts` y `environment.development.ts` para ingresar la base URL de tu API de Django y el Client ID de Google:
+    ```typescript
+    export const environment = {
+      production: false, // o true para producción
+      apiUrl: 'http://localhost:8000/api/',
+      googleClientId: 'TU_GOOGLE_CLIENT_ID.apps.googleusercontent.com'
+    };
+    ```
+
+4.  **Iniciar el servidor de desarrollo**:
     ```bash
     npm start
     ```
 
-4.  **Acceder a la aplicación**:
+5.  **Acceder a la aplicación**:
     Abre tu navegador e ingresa a: `http://localhost:4200`
 
 ---
