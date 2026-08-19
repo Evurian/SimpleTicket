@@ -214,15 +214,17 @@ LOGGING = {
 }
 
 
-# In development
-CORS_ALLOW_ALL_ORIGINS = True
+# In development & local testing
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+    "https://simple-ticket-apkol.vercel.app", # Tu URL de producción
+]
 
-# In Production
-
-# CORS_ALLOWED_ORIGINS = [
-#      'http://localhost:4200',
-# ]
-
+# Permitir dinámicamente cualquier URL de previsualización de tu proyecto en Vercel
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://simple-ticket-.*-apkol\.vercel\.app$",
+]
 
 # settings.py
 
