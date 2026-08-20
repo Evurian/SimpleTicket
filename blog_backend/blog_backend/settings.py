@@ -235,3 +235,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  
 EMAIL_HOST_USER = 'a9336034@gmail.com'  
 EMAIL_HOST_PASSWORD = 'wruv mzzk nnga qhwj'  
+EMAIL_TIMEOUT = 3  
