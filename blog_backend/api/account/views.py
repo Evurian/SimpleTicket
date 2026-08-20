@@ -21,12 +21,15 @@ def signUp(request):
             user = serializer.save()
             
             # Enviar correo de bienvenida
-            subject = 'Bienvenido a nuestra plataforma'
-            message = f'Hola {user.username},\n\nGracias por registrarte en nuestra plataforma. ¡Esperamos que disfrutes de nuestros servicios!'
-            from_email = settings.EMAIL_HOST_USER
-            recipient_list = [user.email]
-            
-            send_mail(subject, message, from_email, recipient_list)
+            try:
+                subject = 'Bienvenido a nuestra plataforma'
+                message = f'Hola {user.username},\n\nGracias por registrarte en nuestra plataforma. ¡Esperamos que disfrutes de nuestros servicios!'
+                from_email = settings.EMAIL_HOST_USER
+                recipient_list = [user.email]
+                
+                send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+            except Exception as e:
+                print(f"Error sending welcome email: {e}")
 
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         print(serializer.errors)
