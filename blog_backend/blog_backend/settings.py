@@ -218,7 +218,8 @@ LOGGING = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200",
-    "https://simple-ticket-1kv01cbih-apkol.vercel.app", # Tu URL de producción
+    "https://simple-ticket-apkol.vercel.app",
+    "https://simple-ticket-mix8h2yqe-apkol.vercel.app",
 ]
 
 # Permitir dinámicamente cualquier URL de previsualización de tu proyecto en Vercel
